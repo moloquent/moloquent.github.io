@@ -7,13 +7,13 @@
     
     
     
-        <link rel="canonical" href="https://moloquent.github.io/master/">
+        <link rel="canonical" href="https://moloquent.github.io/master/usage/mongodb/">
     
-        <link rel="shortcut icon" href="../img/favicon.ico">
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
 
-    <title>Welcome - Moloquent</title>
+    <title>MongoDB specific - Moloquent</title>
 
-    <link href="../css/application.css" rel="stylesheet">
+    <link href="../../../css/application.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -58,7 +58,7 @@
             </button>
 
             <!-- Main title -->
-            <a class="navbar-brand" href="./">Moloquent</a>
+            <a class="navbar-brand" href="../../">Moloquent</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -67,32 +67,32 @@
             <ul class="nav navbar-nav">
                 
                     
-                        <li class="active">
-                            <a href="./">Welcome</a>
+                        <li >
+                            <a href="../../">Welcome</a>
                         </li>
                     
                 
                     
                         <li >
-                            <a href="installation/">Installation</a>
+                            <a href="../../installation/">Installation</a>
                         </li>
                     
                 
                     
                         <li >
-                            <a href="eloquent/">Eloquent</a>
+                            <a href="../../eloquent/">Eloquent</a>
                         </li>
                     
                 
                     
                         <li >
-                            <a href="builder/">Query Builder</a>
+                            <a href="../../builder/">Query Builder</a>
                         </li>
                     
                 
                     
                         <li >
-                            <a href="schema/">Schema</a>
+                            <a href="../../schema/">Schema</a>
                         </li>
                     
                 
@@ -104,25 +104,25 @@
                                 
                                     
 <li >
-    <a href="extensions/auth/">Auth</a>
+    <a href="../../extensions/auth/">Auth</a>
 </li>
 
                                 
                                     
 <li >
-    <a href="extensions/queue/">Queues</a>
+    <a href="../../extensions/queue/">Queues</a>
 </li>
 
                                 
                                     
 <li >
-    <a href="extensions/sentry/">Sentry</a>
+    <a href="../../extensions/sentry/">Sentry</a>
 </li>
 
                                 
                                     
 <li >
-    <a href="extensions/session/">Session</a>
+    <a href="../../extensions/session/">Session</a>
 </li>
 
                                 
@@ -131,32 +131,32 @@
                     
                 
                     
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usage <b
                                     class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 
                                     
 <li >
-    <a href="usage/basic/">Basic</a>
+    <a href="../basic/">Basic</a>
 </li>
 
                                 
                                     
 <li >
-    <a href="usage/advanced/">Advanced</a>
+    <a href="../advanced/">Advanced</a>
 </li>
 
                                 
                                     
 <li >
-    <a href="usage/relations/">Relations</a>
+    <a href="../relations/">Relations</a>
 </li>
 
                                 
                                     
-<li >
-    <a href="usage/mongodb/">MongoDB specific</a>
+<li class="active">
+    <a href="./">MongoDB specific</a>
 </li>
 
                                 
@@ -209,7 +209,24 @@
     <div class="nano-content">
         <ul class="nav bs-sidenav">
             
-            <li class="main active"><a href="#moloquent">Moloquent</a></li>
+            <li class="main active"><a href="#raw-expressions">Raw Expressions</a></li>
+            
+            
+            <li class="main "><a href="#mongodb-specific-operations">MongoDB specific operations</a></li>
+            
+            <li><a href="#cursor-timeout">Cursor timeout</a></li>
+            
+            <li><a href="#upsert">Upsert</a></li>
+            
+            <li><a href="#projections">Projections</a></li>
+            
+            <li><a href="#projections-with-pagination">Projections with Pagination</a></li>
+            
+            <li><a href="#push">Push</a></li>
+            
+            <li><a href="#pull">Pull</a></li>
+            
+            <li><a href="#unset">Unset</a></li>
             
             
         </ul>
@@ -218,10 +235,78 @@
     </div>
     <div class="col-md-9" role="main">
 
-<h1 id="moloquent">Moloquent<a class="headerlink" href="#moloquent" title="Permanent link">#</a></h1>
-<p>An <strong>Eloquent</strong> model and Query builder with support for MongoDB, using the original <strong>Laravel</strong> API.<br />
-This library extends the original Laravel classes, so it uses exactly the same methods.<br />
-Just go ahead to <a href="../master/installation/">Installation</a> page to get started using this library.</p></div>
+<h3 id="raw-expressions">Raw Expressions<a class="headerlink" href="#raw-expressions" title="Permanent link">#</a></h3>
+<p>You can also perform raw expressions on the internal MongoCollection object. If this is executed on the model class, it will return a collection of models. If this is executed on the query builder, it will return the original response.</p>
+<pre><code class="php">// Returns a collection of User models.
+$models = User::raw(function($collection)
+{
+    return $collection-&gt;find();
+});
+
+// Returns the original MongoCursor.
+$cursor = DB::collection('users')-&gt;raw(function($collection)
+{
+    return $collection-&gt;find();
+});
+</code></pre>
+
+<p>Optional: if you don't pass a closure to the raw method, the internal MongoCollection object will be accessible:</p>
+<pre><code class="php">$model = User::raw()-&gt;findOne(['age' =&gt; array('$lt' =&gt; 18]));
+</code></pre>
+
+<p>The internal MongoClient and MongoDB objects can be accessed like this:</p>
+<pre><code class="php">$client = DB::getMongoClient();
+$db = DB::getMongoDB();
+</code></pre>
+
+<h3 id="mongodb-specific-operations">MongoDB specific operations<a class="headerlink" href="#mongodb-specific-operations" title="Permanent link">#</a></h3>
+<h4 id="cursor-timeout">Cursor timeout<a class="headerlink" href="#cursor-timeout" title="Permanent link">#</a></h4>
+<p>To prevent MongoCursorTimeout exceptions, you can manually set a timeout value that will be applied to the cursor:</p>
+<pre><code class="php">DB::collection('users')-&gt;timeout(-1)-&gt;get();
+</code></pre>
+
+<h4 id="upsert">Upsert<a class="headerlink" href="#upsert" title="Permanent link">#</a></h4>
+<p>Update or insert a document. Additional options for the update method are passed directly to the native update method.</p>
+<pre><code class="php">DB::collection('users')-&gt;where('name', 'John')
+                       -&gt;update($data, ['upsert' =&gt; true]);
+</code></pre>
+
+<h4 id="projections">Projections<a class="headerlink" href="#projections" title="Permanent link">#</a></h4>
+<p>You can apply projections to your queries using the <code>project</code> method.</p>
+<pre><code class="php">DB::collection('items')-&gt;project(['tags' =&gt; array('$slice' =&gt; 1]))-&gt;get();
+</code></pre>
+
+<h4 id="projections-with-pagination">Projections with Pagination<a class="headerlink" href="#projections-with-pagination" title="Permanent link">#</a></h4>
+<pre><code class="php">$limit = 25;
+$projections = ['id', 'name'];
+DB::collection('items')-&gt;paginate($limit, $projections);
+</code></pre>
+
+<h4 id="push">Push<a class="headerlink" href="#push" title="Permanent link">#</a></h4>
+<p>Add an items to an array.</p>
+<pre><code class="php">DB::collection('users')-&gt;where('name', 'John')-&gt;push('items', 'boots');
+DB::collection('users')-&gt;where('name', 'John')-&gt;push('messages', ['from' =&gt; 'Jane Doe', 'message' =&gt; 'Hi John']);
+</code></pre>
+
+<p>If you don't want duplicate items, set the third parameter to <code>true</code>:</p>
+<pre><code class="php">DB::collection('users')-&gt;where('name', 'John')-&gt;push('items', 'boots', true);
+</code></pre>
+
+<h4 id="pull">Pull<a class="headerlink" href="#pull" title="Permanent link">#</a></h4>
+<p>Remove an item from an array.</p>
+<pre><code class="php">DB::collection('users')-&gt;where('name', 'John')-&gt;pull('items', 'boots');
+DB::collection('users')-&gt;where('name', 'John')-&gt;pull('messages', ['from' =&gt; 'Jane Doe', 'message' =&gt; 'Hi John']);
+</code></pre>
+
+<h4 id="unset">Unset<a class="headerlink" href="#unset" title="Permanent link">#</a></h4>
+<p>Remove one or more fields from a document.</p>
+<pre><code class="php">DB::collection('users')-&gt;where('name', 'John')-&gt;unset('note');
+</code></pre>
+
+<p>You can also perform an unset on a model.</p>
+<pre><code class="php">$user = User::where('name', 'John')-&gt;first();
+$user-&gt;unset('note');
+</code></pre></div>
 </div>
 
 <footer>
@@ -232,13 +317,13 @@ Just go ahead to <a href="../master/installation/">Installation</a> page to get 
     </div>
 </footer>
 
-<script src="../js/jquery-1.10.2.min.js"></script>
-<script src="../js/bootstrap-3.0.3.min.js"></script>
-<script src="../js/highlight.pack.js"></script>
-<script src="../js/jquery.nanoscroller.min.js"></script>
-<script>var base_url = '..';</script>
-<script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
-<script src="../js/base.js"></script>
+<script src="../../../js/jquery-1.10.2.min.js"></script>
+<script src="../../../js/bootstrap-3.0.3.min.js"></script>
+<script src="../../../js/highlight.pack.js"></script>
+<script src="../../../js/jquery.nanoscroller.min.js"></script>
+<script>var base_url = '../../..';</script>
+<script data-main="../../../mkdocs/js/search.js" src="../../../mkdocs/js/require.js"></script>
+<script src="../../../js/base.js"></script>
 
 <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal"
      aria-hidden="true">

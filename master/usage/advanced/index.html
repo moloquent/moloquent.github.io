@@ -7,13 +7,13 @@
     
     
     
-        <link rel="canonical" href="https://moloquent.github.io/master/builder/">
+        <link rel="canonical" href="https://moloquent.github.io/master/usage/advanced/">
     
-        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
 
-    <title>Query Builder - Moloquent</title>
+    <title>Advanced - Moloquent</title>
 
-    <link href="../../css/application.css" rel="stylesheet">
+    <link href="../../../css/application.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -58,7 +58,7 @@
             </button>
 
             <!-- Main title -->
-            <a class="navbar-brand" href="../">Moloquent</a>
+            <a class="navbar-brand" href="../../">Moloquent</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -68,31 +68,31 @@
                 
                     
                         <li >
-                            <a href="../">Welcome</a>
+                            <a href="../../">Welcome</a>
                         </li>
                     
                 
                     
                         <li >
-                            <a href="../installation/">Installation</a>
+                            <a href="../../installation/">Installation</a>
                         </li>
                     
                 
                     
                         <li >
-                            <a href="../eloquent/">Eloquent</a>
-                        </li>
-                    
-                
-                    
-                        <li class="active">
-                            <a href="./">Query Builder</a>
+                            <a href="../../eloquent/">Eloquent</a>
                         </li>
                     
                 
                     
                         <li >
-                            <a href="../schema/">Schema</a>
+                            <a href="../../builder/">Query Builder</a>
+                        </li>
+                    
+                
+                    
+                        <li >
+                            <a href="../../schema/">Schema</a>
                         </li>
                     
                 
@@ -104,25 +104,25 @@
                                 
                                     
 <li >
-    <a href="../extensions/auth/">Auth</a>
+    <a href="../../extensions/auth/">Auth</a>
 </li>
 
                                 
                                     
 <li >
-    <a href="../extensions/queue/">Queues</a>
+    <a href="../../extensions/queue/">Queues</a>
 </li>
 
                                 
                                     
 <li >
-    <a href="../extensions/sentry/">Sentry</a>
+    <a href="../../extensions/sentry/">Sentry</a>
 </li>
 
                                 
                                     
 <li >
-    <a href="../extensions/session/">Session</a>
+    <a href="../../extensions/session/">Session</a>
 </li>
 
                                 
@@ -131,32 +131,32 @@
                     
                 
                     
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usage <b
                                     class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 
                                     
 <li >
-    <a href="../usage/basic/">Basic</a>
+    <a href="../basic/">Basic</a>
+</li>
+
+                                
+                                    
+<li class="active">
+    <a href="./">Advanced</a>
 </li>
 
                                 
                                     
 <li >
-    <a href="../usage/advanced/">Advanced</a>
+    <a href="../relations/">Relations</a>
 </li>
 
                                 
                                     
 <li >
-    <a href="../usage/relations/">Relations</a>
-</li>
-
-                                
-                                    
-<li >
-    <a href="../usage/mongodb/">MongoDB specific</a>
+    <a href="../mongodb/">MongoDB specific</a>
 </li>
 
                                 
@@ -209,7 +209,34 @@
     <div class="nano-content">
         <ul class="nav bs-sidenav">
             
-            <li class="main active"><a href="#query-builder">Query Builder</a></li>
+            <li class="main active"><a href="#dates">Dates</a></li>
+            
+            
+            <li class="main "><a href="#order-by">Order By</a></li>
+            
+            
+            <li class="main "><a href="#offset-limit">Offset &amp; Limit</a></li>
+            
+            
+            <li class="main "><a href="#distinct">Distinct</a></li>
+            
+            
+            <li class="main "><a href="#group-by">Group By</a></li>
+            
+            
+            <li class="main "><a href="#aggregation">Aggregation</a></li>
+            
+            
+            <li class="main "><a href="#incrementing-or-decrementing">Incrementing or decrementing</a></li>
+            
+            
+            <li class="main "><a href="#soft-deleting">Soft deleting</a></li>
+            
+            
+            <li class="main "><a href="#query-caching">Query Caching</a></li>
+            
+            
+            <li class="main "><a href="#query-logging">Query Logging</a></li>
             
             
         </ul>
@@ -218,18 +245,99 @@
     </div>
     <div class="col-md-9" role="main">
 
-<h2 id="query-builder">Query Builder<a class="headerlink" href="#query-builder" title="Permanent link">#</a></h2>
-<p>The database driver plugs right into the original query builder. When using mongodb connections, you will be able to build fluent queries to perform database operations. For your convenience, there is a <code>collection</code> alias for <code>table</code> as well as some additional mongodb specific operators/operations.</p>
-<pre><code class="php">$users = DB::collection('users')-&gt;get();
+<h3 id="dates">Dates<a class="headerlink" href="#dates" title="Permanent link">#</a></h3>
+<p>Eloquent allows you to work with Carbon/DateTime objects instead of MongoDate objects. Internally, these dates will be converted to MongoDate objects when saved to the database. If you wish to use this functionality on non-default date fields you will need to manually specify them as described here: http://laravel.com/docs/eloquent#date-mutators</p>
+<p>Example:</p>
+<pre><code class="php">use Moloquent\Eloquent\Model as Eloquent;
 
-$user = DB::collection('users')-&gt;where('name', 'John')-&gt;first();
+class User extends Eloquent {
+
+    protected $dates = ['birthday'];
+
+}
 </code></pre>
 
-<p>If you did not change your default database connection, you will need to specify it when querying.</p>
-<pre><code class="php">$user = DB::connection('mongodb')-&gt;collection('users')-&gt;get();
+<p>Which allows you to execute queries like:</p>
+<pre><code class="php">$users = User::where('birthday', '&gt;', new DateTime('-18 years'))-&gt;get();
 </code></pre>
 
-<p>Read more about the query builder on http://laravel.com/docs/queries</p></div>
+<h3 id="order-by">Order By<a class="headerlink" href="#order-by" title="Permanent link">#</a></h3>
+<pre><code class="php">$users = User::orderBy('name', 'desc')-&gt;get();
+</code></pre>
+
+<h3 id="offset-limit">Offset &amp; Limit<a class="headerlink" href="#offset-limit" title="Permanent link">#</a></h3>
+<pre><code class="php">$users = User::skip(10)-&gt;take(5)-&gt;get();
+</code></pre>
+
+<h3 id="distinct">Distinct<a class="headerlink" href="#distinct" title="Permanent link">#</a></h3>
+<p>Distinct requires a field for which to return the distinct values.</p>
+<pre><code class="php">$users = User::distinct()-&gt;get(['name']);
+// or
+$users = User::distinct('name')-&gt;get();
+</code></pre>
+
+<p>Distinct can be combined with <strong>where</strong>:</p>
+<pre><code class="php">$users = User::where('active', true)-&gt;distinct('name')-&gt;get();
+</code></pre>
+
+<h3 id="group-by">Group By<a class="headerlink" href="#group-by" title="Permanent link">#</a></h3>
+<p>Selected columns that are not grouped will be aggregated with the $last function.</p>
+<pre><code class="php">$users = Users::groupBy('title')-&gt;get(['title', 'name']);
+</code></pre>
+
+<h3 id="aggregation">Aggregation<a class="headerlink" href="#aggregation" title="Permanent link">#</a></h3>
+<pre><code class="php">$total = Order::count();
+$price = Order::max('price');
+$price = Order::min('price');
+$price = Order::avg('price');
+$total = Order::sum('price');
+</code></pre>
+
+<p>Aggregations can be combined with <strong>where</strong>:</p>
+<pre><code class="php">$sold = Orders::where('sold', true)-&gt;sum('price');
+</code></pre>
+
+<h3 id="incrementing-or-decrementing">Incrementing or decrementing<a class="headerlink" href="#incrementing-or-decrementing" title="Permanent link">#</a></h3>
+<p>Perform increments or decrements (default 1) on specified attributes:</p>
+<pre><code class="php">User::where('name', 'John Doe')-&gt;increment('age');
+User::where('name', 'Jaques')-&gt;decrement('weight', 50);
+</code></pre>
+
+<p>The number of updated objects is returned:</p>
+<pre><code class="php">$count = User-&gt;increment('age');
+</code></pre>
+
+<p>You may also specify additional columns to update:</p>
+<pre><code class="php">User::where('age', '29')-&gt;increment('age', 1, ['group' =&gt; 'thirty something']);
+User::where('bmi', 30)-&gt;decrement('bmi', 1, ['category' =&gt; 'overweight']);
+</code></pre>
+
+<h3 id="soft-deleting">Soft deleting<a class="headerlink" href="#soft-deleting" title="Permanent link">#</a></h3>
+<p>When soft deleting a model, it is not actually removed from your database. Instead, a deleted_at timestamp is set on the record. To enable soft deletes for a model, apply the SoftDeletingTrait to the model:</p>
+<pre><code class="php">use Moloquent\Eloquent\SoftDeletes;
+
+class User extends Eloquent {
+
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
+}
+</code></pre>
+
+<p>For more information check http://laravel.com/docs/eloquent#soft-deleting</p>
+<h3 id="query-caching">Query Caching<a class="headerlink" href="#query-caching" title="Permanent link">#</a></h3>
+<p>You may easily cache the results of a query using the remember method:</p>
+<pre><code class="php">$users = User::remember(10)-&gt;get();
+</code></pre>
+
+<p><em>From: http://laravel.com/docs/queries#caching-queries</em></p>
+<h3 id="query-logging">Query Logging<a class="headerlink" href="#query-logging" title="Permanent link">#</a></h3>
+<p>By default, Laravel keeps a log in memory of all queries that have been run for the current request. However, in some cases, such as when inserting a large number of rows, this can cause the application to use excess memory. To disable the log, you may use the <code>disableQueryLog</code> method:</p>
+<pre><code class="php">DB::connection()-&gt;disableQueryLog();
+</code></pre>
+
+<p><em>From: http://laravel.com/docs/database#query-logging</em></p></div>
 </div>
 
 <footer>
@@ -240,13 +348,13 @@ $user = DB::collection('users')-&gt;where('name', 'John')-&gt;first();
     </div>
 </footer>
 
-<script src="../../js/jquery-1.10.2.min.js"></script>
-<script src="../../js/bootstrap-3.0.3.min.js"></script>
-<script src="../../js/highlight.pack.js"></script>
-<script src="../../js/jquery.nanoscroller.min.js"></script>
-<script>var base_url = '../..';</script>
-<script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
-<script src="../../js/base.js"></script>
+<script src="../../../js/jquery-1.10.2.min.js"></script>
+<script src="../../../js/bootstrap-3.0.3.min.js"></script>
+<script src="../../../js/highlight.pack.js"></script>
+<script src="../../../js/jquery.nanoscroller.min.js"></script>
+<script>var base_url = '../../..';</script>
+<script data-main="../../../mkdocs/js/search.js" src="../../../mkdocs/js/require.js"></script>
+<script src="../../../js/base.js"></script>
 
 <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal"
      aria-hidden="true">
