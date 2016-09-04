@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    <title>Usage - Moloquent</title>
+
+    <link href="../../css/application.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-83645466-1', 'moloquent.github.io');
+            ga('send', 'pageview');
+        </script>
+    
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top"
+     role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../">Moloquent</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                
+                    
+                        <li >
+                            <a href="../">Home</a>
+                        </li>
+                    
+                
+                    
+                        <li >
+                            <a href="../installation/">Installation</a>
+                        </li>
+                    
+                
+                    
+                        <li >
+                            <a href="../configuration/">Configuration</a>
+                        </li>
+                    
+                
+                    
+                        <li >
+                            <a href="../eloquent/">Eloquent</a>
+                        </li>
+                    
+                
+                    
+                        <li >
+                            <a href="../builder/">Query Builder</a>
+                        </li>
+                    
+                
+                    
+                        <li >
+                            <a href="../schema/">Schema</a>
+                        </li>
+                    
+                
+                    
+                        <li >
+                            <a href="../extensions/">Extensions</a>
+                        </li>
+                    
+                
+                    
+                        <li class="active">
+                            <a href="./">Usage</a>
+                        </li>
+                    
+                
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/moloquent" target="_blank">
+                            
+                        </a>
+                    </li>
+                
+                <li class="dropdown">
+                    <button class="btn dropdown-toggle btn-danger btn-version" data-toggle="dropdown">
+                        Master
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="">
+                                    Master
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+<div class="container" id="content">
+    <div class="col-md-3">
+        
+            <div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#usage">Usage</a></li>
+        
+            <li><a href="#basic-usage">Basic Usage</a></li>
+        
+            <li><a href="#mongodb-specific-operators">MongoDB specific operators</a></li>
+        
+            <li><a href="#inserts-updates-and-deletes">Inserts, updates and deletes</a></li>
+        
+            <li><a href="#dates">Dates</a></li>
+        
+            <li><a href="#relations">Relations</a></li>
+        
+            <li><a href="#embedsmany-relations">EmbedsMany Relations</a></li>
+        
+            <li><a href="#embedsone-relations">EmbedsOne Relations</a></li>
+        
+            <li><a href="#mysql-relations">MySQL Relations</a></li>
+        
+            <li><a href="#raw-expressions">Raw Expressions</a></li>
+        
+            <li><a href="#mongodb-specific-operations">MongoDB specific operations</a></li>
+        
+            <li><a href="#query-caching">Query Caching</a></li>
+        
+            <li><a href="#query-logging">Query Logging</a></li>
+        
+    
+    </ul>
+</div>
+        
+    </div>
+    <div class="col-md-9" role="main">
+
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h2>
+<h3 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">#</a></h3>
+<p><strong>Retrieving All Models</strong></p>
+<pre><code class="php">$users = User::all();
+</code></pre>
+
+<p><strong>Retrieving A Record By Primary Key</strong></p>
+<pre><code class="php">$user = User::find('517c43667db388101e00000f');
+</code></pre>
+
+<p><strong>Wheres</strong></p>
+<pre><code class="php">$users = User::where('votes', '&gt;', 100)-&gt;take(10)-&gt;get();
+</code></pre>
+
+<p><strong>Or Statements</strong></p>
+<pre><code class="php">$users = User::where('votes', '&gt;', 100)-&gt;orWhere('name', 'John')-&gt;get();
+</code></pre>
+
+<p><strong>And Statements</strong></p>
+<pre><code class="php">$users = User::where('votes', '&gt;', 100)-&gt;where('name', '=', 'John')-&gt;get();
+</code></pre>
+
+<p><strong>Using Where In With An Array</strong></p>
+<pre><code class="php">$users = User::whereIn('age', [16, 18, 20])-&gt;get();
+</code></pre>
+
+<p>When using <code>whereNotIn</code> objects will be returned if the field is non existent. Combine with <code>whereNotNull('age')</code> to leave out those documents.</p>
+<p><strong>Using Where Between</strong></p>
+<pre><code class="php">$users = User::whereBetween('votes', [1, 100])-&gt;get();
+</code></pre>
+
+<p><strong>Where null</strong></p>
+<pre><code class="php">$users = User::whereNull('updated_at')-&gt;get();
+</code></pre>
+
+<p><strong>Order By</strong></p>
+<pre><code class="php">$users = User::orderBy('name', 'desc')-&gt;get();
+</code></pre>
+
+<p><strong>Offset &amp; Limit</strong></p>
+<pre><code class="php">$users = User::skip(10)-&gt;take(5)-&gt;get();
+</code></pre>
+
+<p><strong>Distinct</strong></p>
+<p>Distinct requires a field for which to return the distinct values.</p>
+<pre><code class="php">$users = User::distinct()-&gt;get(['name']);
+// or
+$users = User::distinct('name')-&gt;get();
+</code></pre>
+
+<p>Distinct can be combined with <strong>where</strong>:</p>
+<pre><code class="php">$users = User::where('active', true)-&gt;distinct('name')-&gt;get();
+</code></pre>
+
+<p><strong>Advanced Wheres</strong></p>
+<pre><code class="php">$users = User::where('name', '=', 'John')-&gt;orWhere(function($query)
+    {
+        $query-&gt;where('votes', '&gt;', 100)
+              -&gt;where('title', '&lt;&gt;', 'Admin');
+    })
+    -&gt;get();
+</code></pre>
+
+<p><strong>Group By</strong></p>
+<p>Selected columns that are not grouped will be aggregated with the $last function.</p>
+<pre><code class="php">$users = Users::groupBy('title')-&gt;get(['title', 'name']);
+</code></pre>
+
+<p><strong>Aggregation</strong></p>
+<p><em>Aggregations are only available for MongoDB versions greater than 2.2.</em></p>
+<pre><code class="php">$total = Order::count();
+$price = Order::max('price');
+$price = Order::min('price');
+$price = Order::avg('price');
+$total = Order::sum('price');
+</code></pre>
+
+<p>Aggregations can be combined with <strong>where</strong>:</p>
+<pre><code class="php">$sold = Orders::where('sold', true)-&gt;sum('price');
+</code></pre>
+
+<p><strong>Like</strong></p>
+<pre><code class="php">$user = Comment::where('body', 'like', '%spam%')-&gt;get();
+</code></pre>
+
+<p><strong>Incrementing or decrementing a value of a column</strong></p>
+<p>Perform increments or decrements (default 1) on specified attributes:</p>
+<pre><code class="php">User::where('name', 'John Doe')-&gt;increment('age');
+User::where('name', 'Jaques')-&gt;decrement('weight', 50);
+</code></pre>
+
+<p>The number of updated objects is returned:</p>
+<pre><code class="php">$count = User-&gt;increment('age');
+</code></pre>
+
+<p>You may also specify additional columns to update:</p>
+<pre><code class="php">User::where('age', '29')-&gt;increment('age', 1, ['group' =&gt; 'thirty something']);
+User::where('bmi', 30)-&gt;decrement('bmi', 1, ['category' =&gt; 'overweight']);
+</code></pre>
+
+<p><strong>Soft deleting</strong></p>
+<p>When soft deleting a model, it is not actually removed from your database. Instead, a deleted_at timestamp is set on the record. To enable soft deletes for a model, apply the SoftDeletingTrait to the model:</p>
+<pre><code class="php">use Jenssegers\Mongodb\Eloquent\SoftDeletes;
+
+class User extends Eloquent {
+
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
+}
+</code></pre>
+
+<p>For more information check http://laravel.com/docs/eloquent#soft-deleting</p>
+<h3 id="mongodb-specific-operators">MongoDB specific operators<a class="headerlink" href="#mongodb-specific-operators" title="Permanent link">#</a></h3>
+<p><strong>Exists</strong></p>
+<p>Matches documents that have the specified field.</p>
+<pre><code class="php">User::where('age', 'exists', true)-&gt;get();
+</code></pre>
+
+<p><strong>All</strong></p>
+<p>Matches arrays that contain all elements specified in the query.</p>
+<pre><code class="php">User::where('roles', 'all', ['moderator', 'author'])-&gt;get();
+</code></pre>
+
+<p><strong>Size</strong></p>
+<p>Selects documents if the array field is a specified size.</p>
+<pre><code class="php">User::where('tags', 'size', 3)-&gt;get();
+</code></pre>
+
+<p><strong>Regex</strong></p>
+<p>Selects documents where values match a specified regular expression.</p>
+<pre><code class="php">User::where('name', 'regex', new MongoRegex(&quot;/.*doe/i&quot;))-&gt;get();
+</code></pre>
+
+<p><strong>NOTE:</strong> you can also use the Laravel regexp operations. These are a bit more flexible and will automatically convert your regular expression string to a MongoRegex object.</p>
+<pre><code class="php">User::where('name', 'regexp', '/.*doe/i'))-&gt;get();
+</code></pre>
+
+<p>And the inverse:</p>
+<pre><code class="php">User::where('name', 'not regexp', '/.*doe/i'))-&gt;get();
+</code></pre>
+
+<p><strong>Type</strong></p>
+<p>Selects documents if a field is of the specified type. For more information check: http://docs.mongodb.org/manual/reference/operator/query/type/#op._S_type</p>
+<pre><code class="php">User::where('age', 'type', 2)-&gt;get();
+</code></pre>
+
+<p><strong>Mod</strong></p>
+<p>Performs a modulo operation on the value of a field and selects documents with a specified result.</p>
+<pre><code class="php">User::where('age', 'mod', [10, 0])-&gt;get();
+</code></pre>
+
+<p><strong>Where</strong></p>
+<p>Matches documents that satisfy a JavaScript expression. For more information check http://docs.mongodb.org/manual/reference/operator/query/where/#op._S_where</p>
+<h3 id="inserts-updates-and-deletes">Inserts, updates and deletes<a class="headerlink" href="#inserts-updates-and-deletes" title="Permanent link">#</a></h3>
+<p>Inserting, updating and deleting records works just like the original Eloquent.</p>
+<p><strong>Saving a new model</strong></p>
+<pre><code class="php">$user = new User;
+$user-&gt;name = 'John';
+$user-&gt;save();
+</code></pre>
+
+<p>You may also use the create method to save a new model in a single line:</p>
+<pre><code class="php">User::create(['name' =&gt; 'John']);
+</code></pre>
+
+<p><strong>Updating a model</strong></p>
+<p>To update a model, you may retrieve it, change an attribute, and use the save method.</p>
+<pre><code class="php">$user = User::first();
+$user-&gt;email = 'john@foo.com';
+$user-&gt;save();
+</code></pre>
+
+<p><em>There is also support for upsert operations, check https://github.com/jenssegers/laravel-mongodb#mongodb-specific-operations</em></p>
+<p><strong>Deleting a model</strong></p>
+<p>To delete a model, simply call the delete method on the instance:</p>
+<pre><code class="php">$user = User::first();
+$user-&gt;delete();
+</code></pre>
+
+<p>Or deleting a model by its key:</p>
+<pre><code class="php">User::destroy('517c43667db388101e00000f');
+</code></pre>
+
+<p>For more information about model manipulation, check http://laravel.com/docs/eloquent#insert-update-delete</p>
+<h3 id="dates">Dates<a class="headerlink" href="#dates" title="Permanent link">#</a></h3>
+<p>Eloquent allows you to work with Carbon/DateTime objects instead of MongoDate objects. Internally, these dates will be converted to MongoDate objects when saved to the database. If you wish to use this functionality on non-default date fields you will need to manually specify them as described here: http://laravel.com/docs/eloquent#date-mutators</p>
+<p>Example:</p>
+<pre><code class="php">use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+
+class User extends Eloquent {
+
+    protected $dates = ['birthday'];
+
+}
+</code></pre>
+
+<p>Which allows you to execute queries like:</p>
+<pre><code class="php">$users = User::where('birthday', '&gt;', new DateTime('-18 years'))-&gt;get();
+</code></pre>
+
+<h3 id="relations">Relations<a class="headerlink" href="#relations" title="Permanent link">#</a></h3>
+<p>Supported relations are:</p>
+<ul>
+<li>hasOne</li>
+<li>hasMany</li>
+<li>belongsTo</li>
+<li>belongsToMany</li>
+<li>embedsOne</li>
+<li>embedsMany</li>
+</ul>
+<p>Example:</p>
+<pre><code class="php">use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+
+class User extends Eloquent {
+
+    public function items()
+    {
+        return $this-&gt;hasMany('Item');
+    }
+
+}
+</code></pre>
+
+<p>And the inverse relation:</p>
+<pre><code class="php">use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+
+class Item extends Eloquent {
+
+    public function user()
+    {
+        return $this-&gt;belongsTo('User');
+    }
+
+}
+</code></pre>
+
+<p>The belongsToMany relation will not use a pivot "table", but will push id's to a <strong>related_ids</strong> attribute instead. This makes the second parameter for the belongsToMany method useless. If you want to define custom keys for your relation, set it to <code>null</code>:</p>
+<pre><code class="php">use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+
+class User extends Eloquent {
+
+    public function groups()
+    {
+        return $this-&gt;belongsToMany('Group', null, 'user_ids', 'group_ids');
+    }
+
+}
+</code></pre>
+
+<p>Other relations are not yet supported, but may be added in the future. Read more about these relations on http://laravel.com/docs/eloquent#relationships</p>
+<h3 id="embedsmany-relations">EmbedsMany Relations<a class="headerlink" href="#embedsmany-relations" title="Permanent link">#</a></h3>
+<p>If you want to embed models, rather than referencing them, you can use the <code>embedsMany</code> relation. This relation is similar to the <code>hasMany</code> relation, but embeds the models inside the parent object.</p>
+<p><strong>REMEMBER</strong>: these relations return Eloquent collections, they don't return query builder objects!</p>
+<pre><code class="php">use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+
+class User extends Eloquent {
+
+    public function books()
+    {
+        return $this-&gt;embedsMany('Book');
+    }
+
+}
+</code></pre>
+
+<p>You access the embedded models through the dynamic property:</p>
+<pre><code class="php">$books = User::first()-&gt;books;
+</code></pre>
+
+<p>The inverse relation is auto<em>magically</em> available, you don't need to define this reverse relation.</p>
+<pre><code class="php">$user = $book-&gt;user;
+</code></pre>
+
+<p>Inserting and updating embedded models works similar to the <code>hasMany</code> relation:</p>
+<pre><code class="php">$book = new Book(['title' =&gt; 'A Game of Thrones']);
+
+$user = User::first();
+
+$book = $user-&gt;books()-&gt;save($book);
+// or
+$book = $user-&gt;books()-&gt;create(['title' =&gt; 'A Game of Thrones'])
+</code></pre>
+
+<p>You can update embedded models using their <code>save</code> method (available since release 2.0.0):</p>
+<pre><code class="php">$book = $user-&gt;books()-&gt;first();
+
+$book-&gt;title = 'A Game of Thrones';
+
+$book-&gt;save();
+</code></pre>
+
+<p>You can remove an embedded model by using the <code>destroy</code> method on the relation, or the <code>delete</code> method on the model (available since release 2.0.0):</p>
+<pre><code class="php">$book = $user-&gt;books()-&gt;first();
+
+$book-&gt;delete();
+// or
+$user-&gt;books()-&gt;destroy($book);
+</code></pre>
+
+<p>If you want to add or remove an embedded model, without touching the database, you can use the <code>associate</code> and <code>dissociate</code> methods. To eventually write the changes to the database, save the parent object:</p>
+<pre><code class="php">$user-&gt;books()-&gt;associate($book);
+
+$user-&gt;save();
+</code></pre>
+
+<p>Like other relations, embedsMany assumes the local key of the relationship based on the model name. You can override the default local key by passing a second argument to the embedsMany method:</p>
+<pre><code class="php">return $this-&gt;embedsMany('Book', 'local_key');
+</code></pre>
+
+<p>Embedded relations will return a Collection of embedded items instead of a query builder. Check out the available operations here: https://laravel.com/docs/master/collections</p>
+<h3 id="embedsone-relations">EmbedsOne Relations<a class="headerlink" href="#embedsone-relations" title="Permanent link">#</a></h3>
+<p>The embedsOne relation is similar to the EmbedsMany relation, but only embeds a single model.</p>
+<pre><code class="php">use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+
+class Book extends Eloquent {
+
+    public function author()
+    {
+        return $this-&gt;embedsOne('Author');
+    }
+
+}
+</code></pre>
+
+<p>You access the embedded models through the dynamic property:</p>
+<pre><code class="php">$author = Book::first()-&gt;author;
+</code></pre>
+
+<p>Inserting and updating embedded models works similar to the <code>hasOne</code> relation:</p>
+<pre><code class="php">$author = new Author(['name' =&gt; 'John Doe']);
+
+$book = Books::first();
+
+$author = $book-&gt;author()-&gt;save($author);
+// or
+$author = $book-&gt;author()-&gt;create(['name' =&gt; 'John Doe']);
+</code></pre>
+
+<p>You can update the embedded model using the <code>save</code> method (available since release 2.0.0):</p>
+<pre><code class="php">$author = $book-&gt;author;
+
+$author-&gt;name = 'Jane Doe';
+$author-&gt;save();
+</code></pre>
+
+<p>You can replace the embedded model with a new model like this:</p>
+<pre><code class="php">$newAuthor = new Author(['name' =&gt; 'Jane Doe']);
+$book-&gt;author()-&gt;save($newAuthor);
+</code></pre>
+
+<h3 id="mysql-relations">MySQL Relations<a class="headerlink" href="#mysql-relations" title="Permanent link">#</a></h3>
+<p>If you're using a hybrid MongoDB and SQL setup, you're in luck! The model will automatically return a MongoDB- or SQL-relation based on the type of the related model. Of course, if you want this functionality to work both ways, your SQL-models will need use the <code>Jenssegers\Mongodb\Eloquent\HybridRelations</code> trait. Note that this functionality only works for hasOne, hasMany and belongsTo relations.</p>
+<p>Example SQL-based User model:</p>
+<pre><code class="php">use Jenssegers\Mongodb\Eloquent\HybridRelations;
+
+class User extends Eloquent {
+
+    use HybridRelations;
+
+    protected $connection = 'mysql';
+
+    public function messages()
+    {
+        return $this-&gt;hasMany('Message');
+    }
+
+}
+</code></pre>
+
+<p>And the Mongodb-based Message model:</p>
+<pre><code class="php">use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+
+class Message extends Eloquent {
+
+    protected $connection = 'mongodb';
+
+    public function user()
+    {
+        return $this-&gt;belongsTo('User');
+    }
+
+}
+</code></pre>
+
+<h3 id="raw-expressions">Raw Expressions<a class="headerlink" href="#raw-expressions" title="Permanent link">#</a></h3>
+<p>These expressions will be injected directly into the query.</p>
+<pre><code class="php">User::whereRaw(['age' =&gt; array('$gt' =&gt; 30, '$lt' =&gt; 40)])-&gt;get();
+</code></pre>
+
+<p>You can also perform raw expressions on the internal MongoCollection object. If this is executed on the model class, it will return a collection of models. If this is executed on the query builder, it will return the original response.</p>
+<pre><code class="php">// Returns a collection of User models.
+$models = User::raw(function($collection)
+{
+    return $collection-&gt;find();
+});
+
+// Returns the original MongoCursor.
+$cursor = DB::collection('users')-&gt;raw(function($collection)
+{
+    return $collection-&gt;find();
+});
+</code></pre>
+
+<p>Optional: if you don't pass a closure to the raw method, the internal MongoCollection object will be accessible:</p>
+<pre><code class="php">$model = User::raw()-&gt;findOne(['age' =&gt; array('$lt' =&gt; 18]));
+</code></pre>
+
+<p>The internal MongoClient and MongoDB objects can be accessed like this:</p>
+<pre><code class="php">$client = DB::getMongoClient();
+$db = DB::getMongoDB();
+</code></pre>
+
+<h3 id="mongodb-specific-operations">MongoDB specific operations<a class="headerlink" href="#mongodb-specific-operations" title="Permanent link">#</a></h3>
+<p><strong>Cursor timeout</strong></p>
+<p>To prevent MongoCursorTimeout exceptions, you can manually set a timeout value that will be applied to the cursor:</p>
+<pre><code class="php">DB::collection('users')-&gt;timeout(-1)-&gt;get();
+</code></pre>
+
+<p><strong>Upsert</strong></p>
+<p>Update or insert a document. Additional options for the update method are passed directly to the native update method.</p>
+<pre><code class="php">DB::collection('users')-&gt;where('name', 'John')
+                       -&gt;update($data, ['upsert' =&gt; true]);
+</code></pre>
+
+<p><strong>Projections</strong></p>
+<p>You can apply projections to your queries using the <code>project</code> method.</p>
+<pre><code class="php">DB::collection('items')-&gt;project(['tags' =&gt; array('$slice' =&gt; 1]))-&gt;get();
+</code></pre>
+
+<p><strong>Projections with Pagination</strong></p>
+<pre><code class="php">$limit = 25;
+$projections = ['id', 'name'];
+DB::collection('items')-&gt;paginate($limit, $projections);
+</code></pre>
+
+<p><strong>Push</strong></p>
+<p>Add an items to an array.</p>
+<pre><code class="php">DB::collection('users')-&gt;where('name', 'John')-&gt;push('items', 'boots');
+DB::collection('users')-&gt;where('name', 'John')-&gt;push('messages', ['from' =&gt; 'Jane Doe', 'message' =&gt; 'Hi John']);
+</code></pre>
+
+<p>If you don't want duplicate items, set the third parameter to <code>true</code>:</p>
+<pre><code class="php">DB::collection('users')-&gt;where('name', 'John')-&gt;push('items', 'boots', true);
+</code></pre>
+
+<p><strong>Pull</strong></p>
+<p>Remove an item from an array.</p>
+<pre><code class="php">DB::collection('users')-&gt;where('name', 'John')-&gt;pull('items', 'boots');
+DB::collection('users')-&gt;where('name', 'John')-&gt;pull('messages', ['from' =&gt; 'Jane Doe', 'message' =&gt; 'Hi John']);
+</code></pre>
+
+<p><strong>Unset</strong></p>
+<p>Remove one or more fields from a document.</p>
+<pre><code class="php">DB::collection('users')-&gt;where('name', 'John')-&gt;unset('note');
+</code></pre>
+
+<p>You can also perform an unset on a model.</p>
+<pre><code class="php">$user = User::where('name', 'John')-&gt;first();
+$user-&gt;unset('note');
+</code></pre>
+
+<h3 id="query-caching">Query Caching<a class="headerlink" href="#query-caching" title="Permanent link">#</a></h3>
+<p>You may easily cache the results of a query using the remember method:</p>
+<pre><code class="php">$users = User::remember(10)-&gt;get();
+</code></pre>
+
+<p><em>From: http://laravel.com/docs/queries#caching-queries</em></p>
+<h3 id="query-logging">Query Logging<a class="headerlink" href="#query-logging" title="Permanent link">#</a></h3>
+<p>By default, Laravel keeps a log in memory of all queries that have been run for the current request. However, in some cases, such as when inserting a large number of rows, this can cause the application to use excess memory. To disable the log, you may use the <code>disableQueryLog</code> method:</p>
+<pre><code class="php">DB::connection()-&gt;disableQueryLog();
+</code></pre>
+
+<p><em>From: http://laravel.com/docs/database#query-logging</em></p></div>
+</div>
+
+<footer>
+    <hr>
+    <div style="text-align: center;">
+        Developed by <a href="https://github.com/jenssegers">Jenssegers</a> | Docs by <a href="https://github.com/pi0">pi0</a>
+        <br>
+        Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.
+    </div>
+</footer>
+
+<script src="../../js/jquery-1.10.2.min.js"></script>
+<script src="../../js/bootstrap-3.0.3.min.js"></script>
+<script src="../../js/highlight.pack.js"></script>
+<script>var base_url = '../..';</script>
+<script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+<script src="../../js/base.js"></script>
+
+<div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
