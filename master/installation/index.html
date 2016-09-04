@@ -7,6 +7,7 @@
     
     
     
+        <link rel="canonical" href="https://moloquent.github.io/master/installation/">
     
         <link rel="shortcut icon" href="../../img/favicon.ico">
 
@@ -67,19 +68,13 @@
                 
                     
                         <li >
-                            <a href="../">Home</a>
+                            <a href="../">Moloquent</a>
                         </li>
                     
                 
                     
                         <li class="active">
                             <a href="./">Installation</a>
-                        </li>
-                    
-                
-                    
-                        <li >
-                            <a href="../configuration/">Configuration</a>
                         </li>
                     
                 
@@ -126,6 +121,8 @@
                     <li>
                         <a href="https://github.com/moloquent" target="_blank">
                             
+                                <i class="fa fa-github"></i>
+                            
                         </a>
                     </li>
                 
@@ -152,31 +149,29 @@
 
 <div class="container" id="content">
     <div class="col-md-3">
-        
-            <div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-    
-        <li class="main active"><a href="#installation">Installation</a></li>
-        
+            <div class="bs-sidebar hidden-print affix nano" role="complementary">
+    <div class="nano-content">
+        <ul class="nav bs-sidenav">
+            
+            <li class="main active"><a href="#installation">Installation</a></li>
+            
             <li><a href="#laravel-version-compatibility">Laravel version Compatibility</a></li>
-        
-    
-        <li class="main "><a href="#upgrading">Upgrading</a></li>
-        
-            <li><a href="#upgrading-from-version-2-to-3">Upgrading from version 2 to 3</a></li>
-        
-    
-    </ul>
+            
+            
+            <li class="main "><a href="#configuration">Configuration</a></li>
+            
+            
+        </ul>
+    </div>
 </div>
-        
     </div>
     <div class="col-md-9" role="main">
 
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">#</a></h2>
-<p>Make sure you have the MongoDB PHP driver installed. You can find installation instructions at http://php.net/manual/en/mongodb.installation.php</p>
-<p><strong>WARNING</strong>: The old mongo PHP driver is not supported anymore in versions &gt;= 3.0.</p>
+<p>Make sure you have the MongoDB PHP driver installed.
+You can find installation instructions at http://php.net/manual/en/mongodb.installation.php.</p>
 <p>Installation using composer:</p>
-<pre><code>composer require jenssegers/mongodb
+<pre><code class="bash">composer require moloquent/moloquent
 </code></pre>
 
 <h3 id="laravel-version-compatibility">Laravel version Compatibility<a class="headerlink" href="#laravel-version-compatibility" title="Permanent link">#</a></h3>
@@ -189,33 +184,25 @@
 </thead>
 <tbody>
 <tr>
-<td align="left">4.2.x</td>
-<td align="left">2.0.x</td>
-</tr>
-<tr>
-<td align="left">5.0.x</td>
-<td align="left">2.1.x</td>
-</tr>
-<tr>
 <td align="left">5.1.x</td>
-<td align="left">2.2.x or 3.0.x</td>
+<td align="left">&gt;= 3.0</td>
 </tr>
 <tr>
 <td align="left">5.2.x</td>
-<td align="left">2.3.x or 3.0.x</td>
+<td align="left">&gt;= 3.0</td>
 </tr>
 <tr>
 <td align="left">5.3.x</td>
-<td align="left">3.1.x</td>
+<td align="left">&gt;= 3.1</td>
 </tr>
 </tbody>
 </table>
 <p>And add the service provider in <code>config/app.php</code>:</p>
-<pre><code class="php">Jenssegers\Mongodb\MongodbServiceProvider::class,
+<pre><code class="php">Moloquent\MongodbServiceProvider::class,
 </code></pre>
 
 <p>For usage with <a href="http://lumen.laravel.com">Lumen</a>, add the service provider in <code>bootstrap/app.php</code>. In this file, you will also need to enable Eloquent. You must however ensure that your call to <code>$app-&gt;withEloquent();</code> is <strong>below</strong> where you have registered the <code>MongodbServiceProvider</code>:</p>
-<pre><code class="php">$app-&gt;register('Jenssegers\Mongodb\MongodbServiceProvider');
+<pre><code class="php">$app-&gt;register('Moloquent\MongodbServiceProvider');
 
 $app-&gt;withEloquent();
 </code></pre>
@@ -224,33 +211,39 @@ $app-&gt;withEloquent();
 <p>For usage outside Laravel, check out the <a href="https://github.com/illuminate/database/blob/master/README.md">Capsule manager</a> and add:</p>
 <pre><code class="php">$capsule-&gt;getDatabaseManager()-&gt;extend('mongodb', function($config)
 {
-    return new Jenssegers\Mongodb\Connection($config);
+    return new \Moloquent\Connection($config);
 });
 </code></pre>
 
-<h2 id="upgrading">Upgrading<a class="headerlink" href="#upgrading" title="Permanent link">#</a></h2>
-<h4 id="upgrading-from-version-2-to-3">Upgrading from version 2 to 3<a class="headerlink" href="#upgrading-from-version-2-to-3" title="Permanent link">#</a></h4>
-<p>In this new major release which supports the new mongodb PHP extension, we also moved the location of the Model class and replaced the MySQL model class with a trait.</p>
-<p>Please change all <code>Jenssegers\Mongodb\Model</code> references to <code>Jenssegers\Mongodb\Eloquent\Model</code> either at the top of your model files, or your registered alias.</p>
-<pre><code class="php">use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-
-class User extends Eloquent {}
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">#</a></h2>
+<p>Change your default database connection name in <code>app/config/database.php</code>:</p>
+<pre><code class="php">'default' =&gt; env('DB_CONNECTION', 'mongodb'),
 </code></pre>
 
-<p>If you are using hybrid relations, your MySQL classes should now extend the original Eloquent model class <code>Illuminate\Database\Eloquent\Model</code> instead of the removed <code>Jenssegers\Eloquent\Model</code>. Instead use the new <code>Jenssegers\Mongodb\Eloquent\HybridRelations</code> trait. This should make things more clear as there is only one single model class in this package.</p>
-<pre><code class="php">use Jenssegers\Mongodb\Eloquent\HybridRelations;
-
-class User extends Eloquent {
-
-    use HybridRelations;
-
-    protected $connection = 'mysql';
-
-}
+<p>And add a new mongodb connection:</p>
+<pre><code class="php">'mongodb' =&gt; [
+    'driver'   =&gt; 'mongodb',
+    'host'     =&gt; env('DB_HOST', 'localhost'),
+    'port'     =&gt; env('DB_PORT', 27017),
+    'database' =&gt; env('DB_DATABASE'),
+    'username' =&gt; env('DB_USERNAME'),
+    'password' =&gt; env('DB_PASSWORD'),
+    'options' =&gt; [
+        'database' =&gt; 'admin' // sets the authentication database required by mongo 3
+    ]
+],
 </code></pre>
 
-<p>Embedded relations now return an <code>Illuminate\Database\Eloquent\Collection</code> rather than a custom Collection class. If you were using one of the special methods that were available, convert them to Collection operations.</p>
-<pre><code class="php">$books = $user-&gt;books()-&gt;sortBy('title');
+<p>You can connect to multiple servers or replica sets with the following configuration:</p>
+<pre><code class="php">'mongodb' =&gt; [
+    'driver'   =&gt; 'mongodb',
+    'host'     =&gt; ['server1', 'server2'],
+    'port'     =&gt; env('DB_PORT', 27017),
+    'database' =&gt; env('DB_DATABASE'),
+    'username' =&gt; env('DB_USERNAME'),
+    'password' =&gt; env('DB_PASSWORD'),
+    'options'  =&gt; ['replicaSet' =&gt; 'replicaSetName']
+],
 </code></pre></div>
 </div>
 
@@ -266,6 +259,7 @@ class User extends Eloquent {
 <script src="../../js/jquery-1.10.2.min.js"></script>
 <script src="../../js/bootstrap-3.0.3.min.js"></script>
 <script src="../../js/highlight.pack.js"></script>
+<script src="../../js/jquery.nanoscroller.min.js"></script>
 <script>var base_url = '../..';</script>
 <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
 <script src="../../js/base.js"></script>

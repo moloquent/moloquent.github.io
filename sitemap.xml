@@ -4,49 +4,43 @@
     
         
     <url>
-     <loc>None/master/</loc>
+     <loc>https://moloquent.github.io/master/</loc>
      <lastmod>2016-09-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/master/installation/</loc>
+     <loc>https://moloquent.github.io/master/installation/</loc>
      <lastmod>2016-09-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/master/configuration/</loc>
+     <loc>https://moloquent.github.io/master/eloquent/</loc>
      <lastmod>2016-09-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/master/eloquent/</loc>
+     <loc>https://moloquent.github.io/master/builder/</loc>
      <lastmod>2016-09-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/master/builder/</loc>
+     <loc>https://moloquent.github.io/master/schema/</loc>
      <lastmod>2016-09-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/master/schema/</loc>
+     <loc>https://moloquent.github.io/master/extensions/</loc>
      <lastmod>2016-09-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/master/extensions/</loc>
-     <lastmod>2016-09-04</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>None/master/usage/</loc>
+     <loc>https://moloquent.github.io/master/usage/</loc>
      <lastmod>2016-09-04</lastmod>
      <changefreq>daily</changefreq>
     </url>

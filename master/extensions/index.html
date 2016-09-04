@@ -7,6 +7,7 @@
     
     
     
+        <link rel="canonical" href="https://moloquent.github.io/master/extensions/">
     
         <link rel="shortcut icon" href="../../img/favicon.ico">
 
@@ -67,19 +68,13 @@
                 
                     
                         <li >
-                            <a href="../">Home</a>
+                            <a href="../">Moloquent</a>
                         </li>
                     
                 
                     
                         <li >
                             <a href="../installation/">Installation</a>
-                        </li>
-                    
-                
-                    
-                        <li >
-                            <a href="../configuration/">Configuration</a>
                         </li>
                     
                 
@@ -126,6 +121,8 @@
                     <li>
                         <a href="https://github.com/moloquent" target="_blank">
                             
+                                <i class="fa fa-github"></i>
+                            
                         </a>
                     </li>
                 
@@ -152,31 +149,31 @@
 
 <div class="container" id="content">
     <div class="col-md-3">
-        
-            <div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-    
-        <li class="main active"><a href="#extensions">Extensions</a></li>
-        
+            <div class="bs-sidebar hidden-print affix nano" role="complementary">
+    <div class="nano-content">
+        <ul class="nav bs-sidenav">
+            
+            <li class="main active"><a href="#extensions">Extensions</a></li>
+            
             <li><a href="#auth">Auth</a></li>
-        
+            
             <li><a href="#queues">Queues</a></li>
-        
+            
             <li><a href="#sentry">Sentry</a></li>
-        
+            
             <li><a href="#sessions">Sessions</a></li>
-        
-    
-    </ul>
+            
+            
+        </ul>
+    </div>
 </div>
-        
     </div>
     <div class="col-md-9" role="main">
 
 <h2 id="extensions">Extensions<a class="headerlink" href="#extensions" title="Permanent link">#</a></h2>
 <h3 id="auth">Auth<a class="headerlink" href="#auth" title="Permanent link">#</a></h3>
 <p>If you want to use Laravel's native Auth functionality, register this included service provider:</p>
-<pre><code class="php">'Jenssegers\Mongodb\Auth\PasswordResetServiceProvider',
+<pre><code class="php">'Moloquent\Auth\PasswordResetServiceProvider',
 </code></pre>
 
 <p>This service provider will slightly modify the internal DatabaseReminderRepository to add support for MongoDB based password reminders. If you don't use password reminders, you don't have to register this service provider and everything else should work just fine.</p>
@@ -199,7 +196,7 @@
 </code></pre>
 
 <p>And add the service provider in <code>config/app.php</code>: </p>
-<pre><code class="php">Jenssegers\Mongodb\MongodbQueueServiceProvider::class,
+<pre><code class="php">Moloquent\MongodbQueueServiceProvider::class,
 </code></pre>
 
 <h3 id="sentry">Sentry<a class="headerlink" href="#sentry" title="Permanent link">#</a></h3>
@@ -220,6 +217,7 @@
 <script src="../../js/jquery-1.10.2.min.js"></script>
 <script src="../../js/bootstrap-3.0.3.min.js"></script>
 <script src="../../js/highlight.pack.js"></script>
+<script src="../../js/jquery.nanoscroller.min.js"></script>
 <script>var base_url = '../..';</script>
 <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
 <script src="../../js/base.js"></script>

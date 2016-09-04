@@ -7,6 +7,7 @@
     
     
     
+        <link rel="canonical" href="https://moloquent.github.io/master/usage/">
     
         <link rel="shortcut icon" href="../../img/favicon.ico">
 
@@ -67,19 +68,13 @@
                 
                     
                         <li >
-                            <a href="../">Home</a>
+                            <a href="../">Moloquent</a>
                         </li>
                     
                 
                     
                         <li >
                             <a href="../installation/">Installation</a>
-                        </li>
-                    
-                
-                    
-                        <li >
-                            <a href="../configuration/">Configuration</a>
                         </li>
                     
                 
@@ -126,6 +121,8 @@
                     <li>
                         <a href="https://github.com/moloquent" target="_blank">
                             
+                                <i class="fa fa-github"></i>
+                            
                         </a>
                     </li>
                 
@@ -152,87 +149,180 @@
 
 <div class="container" id="content">
     <div class="col-md-3">
-        
-            <div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-    
-        <li class="main active"><a href="#usage">Usage</a></li>
-        
-            <li><a href="#basic-usage">Basic Usage</a></li>
-        
-            <li><a href="#mongodb-specific-operators">MongoDB specific operators</a></li>
-        
-            <li><a href="#inserts-updates-and-deletes">Inserts, updates and deletes</a></li>
-        
-            <li><a href="#dates">Dates</a></li>
-        
-            <li><a href="#relations">Relations</a></li>
-        
+            <div class="bs-sidebar hidden-print affix nano" role="complementary">
+    <div class="nano-content">
+        <ul class="nav bs-sidenav">
+            
+            <li class="main active"><a href="#basic-usage">Basic Usage</a></li>
+            
+            <li><a href="#retrieving-all-models">Retrieving All Models</a></li>
+            
+            <li><a href="#retrieving-a-record-by-primary-key">Retrieving A Record By Primary Key</a></li>
+            
+            
+            <li class="main "><a href="#wheres">Wheres</a></li>
+            
+            <li><a href="#or-statements">Or Statements</a></li>
+            
+            <li><a href="#and-statements">And Statements</a></li>
+            
+            <li><a href="#where-in-with-an-array">Where In With An Array</a></li>
+            
+            <li><a href="#where-between">Where Between</a></li>
+            
+            <li><a href="#where-null">Where null</a></li>
+            
+            <li><a href="#where-like">Where Like</a></li>
+            
+            <li><a href="#advanced-wheres">Advanced Wheres</a></li>
+            
+            
+            <li class="main "><a href="#order-by">Order By</a></li>
+            
+            
+            <li class="main "><a href="#offset-limit">Offset &amp; Limit</a></li>
+            
+            
+            <li class="main "><a href="#distinct">Distinct</a></li>
+            
+            
+            <li class="main "><a href="#group-by">Group By</a></li>
+            
+            
+            <li class="main "><a href="#aggregation">Aggregation</a></li>
+            
+            
+            <li class="main "><a href="#incrementing-or-decrementing">Incrementing or decrementing</a></li>
+            
+            
+            <li class="main "><a href="#soft-deleting">Soft deleting</a></li>
+            
+            
+            <li class="main "><a href="#mongodb-specific-operators">MongoDB specific operators</a></li>
+            
+            <li><a href="#exists">Exists</a></li>
+            
+            <li><a href="#all">All</a></li>
+            
+            <li><a href="#size">Size</a></li>
+            
+            <li><a href="#regex">Regex</a></li>
+            
+            <li><a href="#type">Type</a></li>
+            
+            <li><a href="#mod">Mod</a></li>
+            
+            <li><a href="#where">Where</a></li>
+            
+            
+            <li class="main "><a href="#inserts-updates-and-deletes">Inserts, updates and deletes</a></li>
+            
+            <li><a href="#saving-a-new-model">Saving a new model</a></li>
+            
+            <li><a href="#updating-a-model">Updating a model</a></li>
+            
+            <li><a href="#deleting-a-model">Deleting a model</a></li>
+            
+            
+            <li class="main "><a href="#dates">Dates</a></li>
+            
+            
+            <li class="main "><a href="#relations">Relations</a></li>
+            
             <li><a href="#embedsmany-relations">EmbedsMany Relations</a></li>
-        
+            
             <li><a href="#embedsone-relations">EmbedsOne Relations</a></li>
-        
+            
             <li><a href="#mysql-relations">MySQL Relations</a></li>
-        
+            
             <li><a href="#raw-expressions">Raw Expressions</a></li>
-        
-            <li><a href="#mongodb-specific-operations">MongoDB specific operations</a></li>
-        
-            <li><a href="#query-caching">Query Caching</a></li>
-        
-            <li><a href="#query-logging">Query Logging</a></li>
-        
-    
-    </ul>
+            
+            
+            <li class="main "><a href="#mongodb-specific-operations">MongoDB specific operations</a></li>
+            
+            <li><a href="#cursor-timeout">Cursor timeout</a></li>
+            
+            <li><a href="#upsert">Upsert</a></li>
+            
+            <li><a href="#projections">Projections</a></li>
+            
+            <li><a href="#projections-with-pagination">Projections with Pagination</a></li>
+            
+            <li><a href="#push">Push</a></li>
+            
+            <li><a href="#pull">Pull</a></li>
+            
+            <li><a href="#unset">Unset</a></li>
+            
+            
+            <li class="main "><a href="#query-caching">Query Caching</a></li>
+            
+            
+            <li class="main "><a href="#query-logging">Query Logging</a></li>
+            
+            
+        </ul>
+    </div>
 </div>
-        
     </div>
     <div class="col-md-9" role="main">
 
-<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h2>
 <h3 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">#</a></h3>
-<p><strong>Retrieving All Models</strong></p>
+<h4 id="retrieving-all-models">Retrieving All Models<a class="headerlink" href="#retrieving-all-models" title="Permanent link">#</a></h4>
 <pre><code class="php">$users = User::all();
 </code></pre>
 
-<p><strong>Retrieving A Record By Primary Key</strong></p>
+<h4 id="retrieving-a-record-by-primary-key">Retrieving A Record By Primary Key<a class="headerlink" href="#retrieving-a-record-by-primary-key" title="Permanent link">#</a></h4>
 <pre><code class="php">$user = User::find('517c43667db388101e00000f');
 </code></pre>
 
-<p><strong>Wheres</strong></p>
+<h3 id="wheres">Wheres<a class="headerlink" href="#wheres" title="Permanent link">#</a></h3>
 <pre><code class="php">$users = User::where('votes', '&gt;', 100)-&gt;take(10)-&gt;get();
 </code></pre>
 
-<p><strong>Or Statements</strong></p>
+<h4 id="or-statements">Or Statements<a class="headerlink" href="#or-statements" title="Permanent link">#</a></h4>
 <pre><code class="php">$users = User::where('votes', '&gt;', 100)-&gt;orWhere('name', 'John')-&gt;get();
 </code></pre>
 
-<p><strong>And Statements</strong></p>
+<h4 id="and-statements">And Statements<a class="headerlink" href="#and-statements" title="Permanent link">#</a></h4>
 <pre><code class="php">$users = User::where('votes', '&gt;', 100)-&gt;where('name', '=', 'John')-&gt;get();
 </code></pre>
 
-<p><strong>Using Where In With An Array</strong></p>
+<h4 id="where-in-with-an-array">Where In With An Array<a class="headerlink" href="#where-in-with-an-array" title="Permanent link">#</a></h4>
 <pre><code class="php">$users = User::whereIn('age', [16, 18, 20])-&gt;get();
 </code></pre>
 
 <p>When using <code>whereNotIn</code> objects will be returned if the field is non existent. Combine with <code>whereNotNull('age')</code> to leave out those documents.</p>
-<p><strong>Using Where Between</strong></p>
+<h4 id="where-between">Where Between<a class="headerlink" href="#where-between" title="Permanent link">#</a></h4>
 <pre><code class="php">$users = User::whereBetween('votes', [1, 100])-&gt;get();
 </code></pre>
 
-<p><strong>Where null</strong></p>
+<h4 id="where-null">Where null<a class="headerlink" href="#where-null" title="Permanent link">#</a></h4>
 <pre><code class="php">$users = User::whereNull('updated_at')-&gt;get();
 </code></pre>
 
-<p><strong>Order By</strong></p>
+<h4 id="where-like">Where Like<a class="headerlink" href="#where-like" title="Permanent link">#</a></h4>
+<pre><code class="php">$user = Comment::where('body', 'like', '%spam%')-&gt;get();
+</code></pre>
+
+<h4 id="advanced-wheres">Advanced Wheres<a class="headerlink" href="#advanced-wheres" title="Permanent link">#</a></h4>
+<pre><code class="php">$users = User::where('name', '=', 'John')-&gt;orWhere(function($query)
+    {
+        $query-&gt;where('votes', '&gt;', 100)
+              -&gt;where('title', '&lt;&gt;', 'Admin');
+    })
+    -&gt;get();
+</code></pre>
+
+<h3 id="order-by">Order By<a class="headerlink" href="#order-by" title="Permanent link">#</a></h3>
 <pre><code class="php">$users = User::orderBy('name', 'desc')-&gt;get();
 </code></pre>
 
-<p><strong>Offset &amp; Limit</strong></p>
+<h3 id="offset-limit">Offset &amp; Limit<a class="headerlink" href="#offset-limit" title="Permanent link">#</a></h3>
 <pre><code class="php">$users = User::skip(10)-&gt;take(5)-&gt;get();
 </code></pre>
 
-<p><strong>Distinct</strong></p>
+<h3 id="distinct">Distinct<a class="headerlink" href="#distinct" title="Permanent link">#</a></h3>
 <p>Distinct requires a field for which to return the distinct values.</p>
 <pre><code class="php">$users = User::distinct()-&gt;get(['name']);
 // or
@@ -243,22 +333,12 @@ $users = User::distinct('name')-&gt;get();
 <pre><code class="php">$users = User::where('active', true)-&gt;distinct('name')-&gt;get();
 </code></pre>
 
-<p><strong>Advanced Wheres</strong></p>
-<pre><code class="php">$users = User::where('name', '=', 'John')-&gt;orWhere(function($query)
-    {
-        $query-&gt;where('votes', '&gt;', 100)
-              -&gt;where('title', '&lt;&gt;', 'Admin');
-    })
-    -&gt;get();
-</code></pre>
-
-<p><strong>Group By</strong></p>
+<h3 id="group-by">Group By<a class="headerlink" href="#group-by" title="Permanent link">#</a></h3>
 <p>Selected columns that are not grouped will be aggregated with the $last function.</p>
 <pre><code class="php">$users = Users::groupBy('title')-&gt;get(['title', 'name']);
 </code></pre>
 
-<p><strong>Aggregation</strong></p>
-<p><em>Aggregations are only available for MongoDB versions greater than 2.2.</em></p>
+<h3 id="aggregation">Aggregation<a class="headerlink" href="#aggregation" title="Permanent link">#</a></h3>
 <pre><code class="php">$total = Order::count();
 $price = Order::max('price');
 $price = Order::min('price');
@@ -270,11 +350,7 @@ $total = Order::sum('price');
 <pre><code class="php">$sold = Orders::where('sold', true)-&gt;sum('price');
 </code></pre>
 
-<p><strong>Like</strong></p>
-<pre><code class="php">$user = Comment::where('body', 'like', '%spam%')-&gt;get();
-</code></pre>
-
-<p><strong>Incrementing or decrementing a value of a column</strong></p>
+<h3 id="incrementing-or-decrementing">Incrementing or decrementing<a class="headerlink" href="#incrementing-or-decrementing" title="Permanent link">#</a></h3>
 <p>Perform increments or decrements (default 1) on specified attributes:</p>
 <pre><code class="php">User::where('name', 'John Doe')-&gt;increment('age');
 User::where('name', 'Jaques')-&gt;decrement('weight', 50);
@@ -289,9 +365,9 @@ User::where('name', 'Jaques')-&gt;decrement('weight', 50);
 User::where('bmi', 30)-&gt;decrement('bmi', 1, ['category' =&gt; 'overweight']);
 </code></pre>
 
-<p><strong>Soft deleting</strong></p>
+<h3 id="soft-deleting">Soft deleting<a class="headerlink" href="#soft-deleting" title="Permanent link">#</a></h3>
 <p>When soft deleting a model, it is not actually removed from your database. Instead, a deleted_at timestamp is set on the record. To enable soft deletes for a model, apply the SoftDeletingTrait to the model:</p>
-<pre><code class="php">use Jenssegers\Mongodb\Eloquent\SoftDeletes;
+<pre><code class="php">use Moloquent\Eloquent\SoftDeletes;
 
 class User extends Eloquent {
 
@@ -304,22 +380,22 @@ class User extends Eloquent {
 
 <p>For more information check http://laravel.com/docs/eloquent#soft-deleting</p>
 <h3 id="mongodb-specific-operators">MongoDB specific operators<a class="headerlink" href="#mongodb-specific-operators" title="Permanent link">#</a></h3>
-<p><strong>Exists</strong></p>
+<h4 id="exists">Exists<a class="headerlink" href="#exists" title="Permanent link">#</a></h4>
 <p>Matches documents that have the specified field.</p>
 <pre><code class="php">User::where('age', 'exists', true)-&gt;get();
 </code></pre>
 
-<p><strong>All</strong></p>
+<h4 id="all">All<a class="headerlink" href="#all" title="Permanent link">#</a></h4>
 <p>Matches arrays that contain all elements specified in the query.</p>
 <pre><code class="php">User::where('roles', 'all', ['moderator', 'author'])-&gt;get();
 </code></pre>
 
-<p><strong>Size</strong></p>
+<h4 id="size">Size<a class="headerlink" href="#size" title="Permanent link">#</a></h4>
 <p>Selects documents if the array field is a specified size.</p>
 <pre><code class="php">User::where('tags', 'size', 3)-&gt;get();
 </code></pre>
 
-<p><strong>Regex</strong></p>
+<h4 id="regex">Regex<a class="headerlink" href="#regex" title="Permanent link">#</a></h4>
 <p>Selects documents where values match a specified regular expression.</p>
 <pre><code class="php">User::where('name', 'regex', new MongoRegex(&quot;/.*doe/i&quot;))-&gt;get();
 </code></pre>
@@ -332,21 +408,21 @@ class User extends Eloquent {
 <pre><code class="php">User::where('name', 'not regexp', '/.*doe/i'))-&gt;get();
 </code></pre>
 
-<p><strong>Type</strong></p>
+<h4 id="type">Type<a class="headerlink" href="#type" title="Permanent link">#</a></h4>
 <p>Selects documents if a field is of the specified type. For more information check: http://docs.mongodb.org/manual/reference/operator/query/type/#op._S_type</p>
 <pre><code class="php">User::where('age', 'type', 2)-&gt;get();
 </code></pre>
 
-<p><strong>Mod</strong></p>
+<h4 id="mod">Mod<a class="headerlink" href="#mod" title="Permanent link">#</a></h4>
 <p>Performs a modulo operation on the value of a field and selects documents with a specified result.</p>
 <pre><code class="php">User::where('age', 'mod', [10, 0])-&gt;get();
 </code></pre>
 
-<p><strong>Where</strong></p>
+<h4 id="where">Where<a class="headerlink" href="#where" title="Permanent link">#</a></h4>
 <p>Matches documents that satisfy a JavaScript expression. For more information check http://docs.mongodb.org/manual/reference/operator/query/where/#op._S_where</p>
 <h3 id="inserts-updates-and-deletes">Inserts, updates and deletes<a class="headerlink" href="#inserts-updates-and-deletes" title="Permanent link">#</a></h3>
 <p>Inserting, updating and deleting records works just like the original Eloquent.</p>
-<p><strong>Saving a new model</strong></p>
+<h4 id="saving-a-new-model">Saving a new model<a class="headerlink" href="#saving-a-new-model" title="Permanent link">#</a></h4>
 <pre><code class="php">$user = new User;
 $user-&gt;name = 'John';
 $user-&gt;save();
@@ -356,15 +432,15 @@ $user-&gt;save();
 <pre><code class="php">User::create(['name' =&gt; 'John']);
 </code></pre>
 
-<p><strong>Updating a model</strong></p>
+<h4 id="updating-a-model">Updating a model<a class="headerlink" href="#updating-a-model" title="Permanent link">#</a></h4>
 <p>To update a model, you may retrieve it, change an attribute, and use the save method.</p>
 <pre><code class="php">$user = User::first();
 $user-&gt;email = 'john@foo.com';
 $user-&gt;save();
 </code></pre>
 
-<p><em>There is also support for upsert operations, check https://github.com/jenssegers/laravel-mongodb#mongodb-specific-operations</em></p>
-<p><strong>Deleting a model</strong></p>
+<p><em>There is also support for upsert operations</em></p>
+<h4 id="deleting-a-model">Deleting a model<a class="headerlink" href="#deleting-a-model" title="Permanent link">#</a></h4>
 <p>To delete a model, simply call the delete method on the instance:</p>
 <pre><code class="php">$user = User::first();
 $user-&gt;delete();
@@ -441,7 +517,7 @@ class User extends Eloquent {
 </code></pre>
 
 <p>Other relations are not yet supported, but may be added in the future. Read more about these relations on http://laravel.com/docs/eloquent#relationships</p>
-<h3 id="embedsmany-relations">EmbedsMany Relations<a class="headerlink" href="#embedsmany-relations" title="Permanent link">#</a></h3>
+<h4 id="embedsmany-relations">EmbedsMany Relations<a class="headerlink" href="#embedsmany-relations" title="Permanent link">#</a></h4>
 <p>If you want to embed models, rather than referencing them, you can use the <code>embedsMany</code> relation. This relation is similar to the <code>hasMany</code> relation, but embeds the models inside the parent object.</p>
 <p><strong>REMEMBER</strong>: these relations return Eloquent collections, they don't return query builder objects!</p>
 <pre><code class="php">use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
@@ -501,7 +577,7 @@ $user-&gt;save();
 </code></pre>
 
 <p>Embedded relations will return a Collection of embedded items instead of a query builder. Check out the available operations here: https://laravel.com/docs/master/collections</p>
-<h3 id="embedsone-relations">EmbedsOne Relations<a class="headerlink" href="#embedsone-relations" title="Permanent link">#</a></h3>
+<h4 id="embedsone-relations">EmbedsOne Relations<a class="headerlink" href="#embedsone-relations" title="Permanent link">#</a></h4>
 <p>The embedsOne relation is similar to the EmbedsMany relation, but only embeds a single model.</p>
 <pre><code class="php">use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
@@ -541,7 +617,7 @@ $author-&gt;save();
 $book-&gt;author()-&gt;save($newAuthor);
 </code></pre>
 
-<h3 id="mysql-relations">MySQL Relations<a class="headerlink" href="#mysql-relations" title="Permanent link">#</a></h3>
+<h4 id="mysql-relations">MySQL Relations<a class="headerlink" href="#mysql-relations" title="Permanent link">#</a></h4>
 <p>If you're using a hybrid MongoDB and SQL setup, you're in luck! The model will automatically return a MongoDB- or SQL-relation based on the type of the related model. Of course, if you want this functionality to work both ways, your SQL-models will need use the <code>Jenssegers\Mongodb\Eloquent\HybridRelations</code> trait. Note that this functionality only works for hasOne, hasMany and belongsTo relations.</p>
 <p>Example SQL-based User model:</p>
 <pre><code class="php">use Jenssegers\Mongodb\Eloquent\HybridRelations;
@@ -575,7 +651,7 @@ class Message extends Eloquent {
 }
 </code></pre>
 
-<h3 id="raw-expressions">Raw Expressions<a class="headerlink" href="#raw-expressions" title="Permanent link">#</a></h3>
+<h4 id="raw-expressions">Raw Expressions<a class="headerlink" href="#raw-expressions" title="Permanent link">#</a></h4>
 <p>These expressions will be injected directly into the query.</p>
 <pre><code class="php">User::whereRaw(['age' =&gt; array('$gt' =&gt; 30, '$lt' =&gt; 40)])-&gt;get();
 </code></pre>
@@ -604,29 +680,29 @@ $db = DB::getMongoDB();
 </code></pre>
 
 <h3 id="mongodb-specific-operations">MongoDB specific operations<a class="headerlink" href="#mongodb-specific-operations" title="Permanent link">#</a></h3>
-<p><strong>Cursor timeout</strong></p>
+<h4 id="cursor-timeout">Cursor timeout<a class="headerlink" href="#cursor-timeout" title="Permanent link">#</a></h4>
 <p>To prevent MongoCursorTimeout exceptions, you can manually set a timeout value that will be applied to the cursor:</p>
 <pre><code class="php">DB::collection('users')-&gt;timeout(-1)-&gt;get();
 </code></pre>
 
-<p><strong>Upsert</strong></p>
+<h4 id="upsert">Upsert<a class="headerlink" href="#upsert" title="Permanent link">#</a></h4>
 <p>Update or insert a document. Additional options for the update method are passed directly to the native update method.</p>
 <pre><code class="php">DB::collection('users')-&gt;where('name', 'John')
                        -&gt;update($data, ['upsert' =&gt; true]);
 </code></pre>
 
-<p><strong>Projections</strong></p>
+<h4 id="projections">Projections<a class="headerlink" href="#projections" title="Permanent link">#</a></h4>
 <p>You can apply projections to your queries using the <code>project</code> method.</p>
 <pre><code class="php">DB::collection('items')-&gt;project(['tags' =&gt; array('$slice' =&gt; 1]))-&gt;get();
 </code></pre>
 
-<p><strong>Projections with Pagination</strong></p>
+<h4 id="projections-with-pagination">Projections with Pagination<a class="headerlink" href="#projections-with-pagination" title="Permanent link">#</a></h4>
 <pre><code class="php">$limit = 25;
 $projections = ['id', 'name'];
 DB::collection('items')-&gt;paginate($limit, $projections);
 </code></pre>
 
-<p><strong>Push</strong></p>
+<h4 id="push">Push<a class="headerlink" href="#push" title="Permanent link">#</a></h4>
 <p>Add an items to an array.</p>
 <pre><code class="php">DB::collection('users')-&gt;where('name', 'John')-&gt;push('items', 'boots');
 DB::collection('users')-&gt;where('name', 'John')-&gt;push('messages', ['from' =&gt; 'Jane Doe', 'message' =&gt; 'Hi John']);
@@ -636,13 +712,13 @@ DB::collection('users')-&gt;where('name', 'John')-&gt;push('messages', ['from' =
 <pre><code class="php">DB::collection('users')-&gt;where('name', 'John')-&gt;push('items', 'boots', true);
 </code></pre>
 
-<p><strong>Pull</strong></p>
+<h4 id="pull">Pull<a class="headerlink" href="#pull" title="Permanent link">#</a></h4>
 <p>Remove an item from an array.</p>
 <pre><code class="php">DB::collection('users')-&gt;where('name', 'John')-&gt;pull('items', 'boots');
 DB::collection('users')-&gt;where('name', 'John')-&gt;pull('messages', ['from' =&gt; 'Jane Doe', 'message' =&gt; 'Hi John']);
 </code></pre>
 
-<p><strong>Unset</strong></p>
+<h4 id="unset">Unset<a class="headerlink" href="#unset" title="Permanent link">#</a></h4>
 <p>Remove one or more fields from a document.</p>
 <pre><code class="php">DB::collection('users')-&gt;where('name', 'John')-&gt;unset('note');
 </code></pre>
@@ -678,6 +754,7 @@ $user-&gt;unset('note');
 <script src="../../js/jquery-1.10.2.min.js"></script>
 <script src="../../js/bootstrap-3.0.3.min.js"></script>
 <script src="../../js/highlight.pack.js"></script>
+<script src="../../js/jquery.nanoscroller.min.js"></script>
 <script>var base_url = '../..';</script>
 <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
 <script src="../../js/base.js"></script>

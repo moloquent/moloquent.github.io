@@ -7,6 +7,7 @@
     
     
     
+        <link rel="canonical" href="https://moloquent.github.io/master/eloquent/">
     
         <link rel="shortcut icon" href="../../img/favicon.ico">
 
@@ -67,19 +68,13 @@
                 
                     
                         <li >
-                            <a href="../">Home</a>
+                            <a href="../">Moloquent</a>
                         </li>
                     
                 
                     
                         <li >
                             <a href="../installation/">Installation</a>
-                        </li>
-                    
-                
-                    
-                        <li >
-                            <a href="../configuration/">Configuration</a>
                         </li>
                     
                 
@@ -126,6 +121,8 @@
                     <li>
                         <a href="https://github.com/moloquent" target="_blank">
                             
+                                <i class="fa fa-github"></i>
+                            
                         </a>
                     </li>
                 
@@ -152,30 +149,30 @@
 
 <div class="container" id="content">
     <div class="col-md-3">
-        
-            <div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-    
-        <li class="main active"><a href="#eloquent">Eloquent</a></li>
-        
+            <div class="bs-sidebar hidden-print affix nano" role="complementary">
+    <div class="nano-content">
+        <ul class="nav bs-sidenav">
+            
+            <li class="main active"><a href="#eloquent">Eloquent</a></li>
+            
             <li><a href="#optional-alias">Optional: Alias</a></li>
-        
-    
-    </ul>
+            
+            
+        </ul>
+    </div>
 </div>
-        
     </div>
     <div class="col-md-9" role="main">
 
 <h2 id="eloquent">Eloquent<a class="headerlink" href="#eloquent" title="Permanent link">#</a></h2>
 <p>This package includes a MongoDB enabled Eloquent class that you can use to define models for corresponding collections.</p>
-<pre><code class="php">use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+<pre><code class="php">use Moloquent\Eloquent\Model as Eloquent;
 
 class User extends Eloquent {}
 </code></pre>
 
 <p>Note that we did not tell Eloquent which collection to use for the <code>User</code> model. Just like the original Eloquent, the lower-case, plural name of the class will be used as the table name unless another name is explicitly specified. You may specify a custom collection (alias for table) by defining a <code>collection</code> property on your model:</p>
-<pre><code class="php">use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+<pre><code class="php">use Moloquent\Eloquent\Model as Eloquent;
 
 class User extends Eloquent {
 
@@ -185,7 +182,7 @@ class User extends Eloquent {
 </code></pre>
 
 <p><strong>NOTE:</strong> Eloquent will also assume that each collection has a primary key column named id. You may define a <code>primaryKey</code> property to override this convention. Likewise, you may define a <code>connection</code> property to override the name of the database connection that should be used when utilizing the model.</p>
-<pre><code class="php">use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+<pre><code class="php">use Moloquent\Eloquent\Model as Eloquent;
 
 class MyModel extends Eloquent {
 
@@ -197,7 +194,7 @@ class MyModel extends Eloquent {
 <p>Everything else (should) work just like the original Eloquent model. Read more about the Eloquent on http://laravel.com/docs/eloquent</p>
 <h3 id="optional-alias">Optional: Alias<a class="headerlink" href="#optional-alias" title="Permanent link">#</a></h3>
 <p>You may also register an alias for the MongoDB model by adding the following to the alias array in <code>app/config/app.php</code>:</p>
-<pre><code class="php">'Moloquent'       =&gt; 'Jenssegers\Mongodb\Eloquent\Model',
+<pre><code class="php">'Moloquent'       =&gt; 'Moloquent\Eloquent\Model',
 </code></pre>
 
 <p>This will allow you to use the registered alias like:</p>
@@ -217,6 +214,7 @@ class MyModel extends Eloquent {
 <script src="../../js/jquery-1.10.2.min.js"></script>
 <script src="../../js/bootstrap-3.0.3.min.js"></script>
 <script src="../../js/highlight.pack.js"></script>
+<script src="../../js/jquery.nanoscroller.min.js"></script>
 <script>var base_url = '../..';</script>
 <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
 <script src="../../js/base.js"></script>
