@@ -346,10 +346,10 @@ $user-&gt;delete();
 
 <h4 id="regex">Regex<a class="headerlink" href="#regex" title="Permanent link">#</a></h4>
 <p>Selects documents where values match a specified regular expression.</p>
-<pre><code class="php">User::where('name', 'regex', new MongoRegex(&quot;/.*doe/i&quot;))-&gt;get();
+<pre><code class="php">User::where('name', 'regex', new \MongoDB\BSON\Regex(&quot;/.*doe/i&quot;))-&gt;get();
 </code></pre>
 
-<p><strong>NOTE:</strong> you can also use the Laravel regexp operations. These are a bit more flexible and will automatically convert your regular expression string to a MongoRegex object.</p>
+<p><strong>NOTE:</strong> you can also use the Laravel regexp operations. These are a bit more flexible and will automatically convert your regular expression string to a <code>MongoDB\BSON\Regex</code> object.</p>
 <pre><code class="php">User::where('name', 'regexp', '/.*doe/i'))-&gt;get();
 </code></pre>
 
