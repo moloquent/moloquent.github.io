@@ -5,43 +5,25 @@
         
     <url>
      <loc>https://moloquent.github.io/master/</loc>
-     <lastmod>2016-09-16</lastmod>
+     <lastmod>2016-09-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://moloquent.github.io/master/installation/</loc>
-     <lastmod>2016-09-16</lastmod>
+     <loc>https://moloquent.github.io/master/basic/</loc>
+     <lastmod>2016-09-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://moloquent.github.io/master/eloquent/</loc>
-     <lastmod>2016-09-16</lastmod>
+     <loc>https://moloquent.github.io/master/advanced/</loc>
+     <lastmod>2016-09-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://moloquent.github.io/master/builder/</loc>
-     <lastmod>2016-09-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://moloquent.github.io/master/schema/</loc>
-     <lastmod>2016-09-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://moloquent.github.io</loc>
-     <lastmod></lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://moloquent.github.io</loc>
-     <lastmod></lastmod>
+     <loc>https://moloquent.github.io/master/relations/</loc>
+     <lastmod>2016-09-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         

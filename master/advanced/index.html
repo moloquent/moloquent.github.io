@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+        <link rel="canonical" href="https://moloquent.github.io/master/advanced/">
+    
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+    <title>Advanced - Moloquent</title>
+
+    <link href="../../css/application.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-83645466-1', 'moloquent.github.io');
+            ga('send', 'pageview');
+        </script>
+    
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top"
+     role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../">Moloquent</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                
+                    
+                        <li >
+                            <a href="../">Getting Started</a>
+                        </li>
+                    
+                
+                    
+                        <li >
+                            <a href="../basic/">Basic Usage</a>
+                        </li>
+                    
+                
+                    
+                        <li class="active">
+                            <a href="./">Advanced</a>
+                        </li>
+                    
+                
+                    
+                        <li >
+                            <a href="../relations/">Relations</a>
+                        </li>
+                    
+                
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/moloquent" target="_blank">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                        </a>
+                    </li>
+                
+                <li class="dropdown">
+                    <button class="btn dropdown-toggle btn-danger btn-version" data-toggle="dropdown">
+                        Master
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="">
+                                    Master
+                                </a>
+                            </li>
+                        
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+<div class="container" id="content">
+    <div class="col-md-3">
+            <div class="bs-sidebar hidden-print affix nano" role="complementary">
+    <div class="nano-content">
+        <ul class="nav bs-sidenav">
+            
+            <li class="main active"><a href="#schema">Schema</a></li>
+            
+            
+            <li class="main "><a href="#dates">Dates</a></li>
+            
+            
+            <li class="main "><a href="#soft-deleting">Soft deleting</a></li>
+            
+            
+            <li class="main "><a href="#query-builder">Query Builder</a></li>
+            
+            <li><a href="#raw-expressions">Raw Expressions</a></li>
+            
+            <li><a href="#query-caching">Query Caching</a></li>
+            
+            <li><a href="#query-logging">Query Logging</a></li>
+            
+            <li><a href="#order-by">Order By</a></li>
+            
+            <li><a href="#offset-limit">Offset &amp; Limit</a></li>
+            
+            <li><a href="#distinct">Distinct</a></li>
+            
+            <li><a href="#group-by">Group By</a></li>
+            
+            <li><a href="#aggregation">Aggregation</a></li>
+            
+            
+            <li class="main "><a href="#mongodb-specific-operations">MongoDB specific operations</a></li>
+            
+            <li><a href="#cursor-timeout">Cursor timeout</a></li>
+            
+            <li><a href="#upsert">Upsert</a></li>
+            
+            <li><a href="#projections">Projections</a></li>
+            
+            <li><a href="#projections-with-pagination">Projections with Pagination</a></li>
+            
+            <li><a href="#push">Push</a></li>
+            
+            <li><a href="#pull">Pull</a></li>
+            
+            <li><a href="#unset">Unset</a></li>
+            
+            <li><a href="#incrementing-or-decrementing">Incrementing or decrementing</a></li>
+            
+            
+        </ul>
+    </div>
+</div>
+    </div>
+    <div class="col-md-9" role="main">
+
+<h3 id="schema">Schema<a class="headerlink" href="#schema" title="Permanent link">#</a></h3>
+<p>The database driver also has (limited) schema builder support. You can easily manipulate collections and set indexes:</p>
+<pre><code class="php">Schema::create('users', function($collection)
+{
+    $collection-&gt;index('name');
+
+    $collection-&gt;unique('email');
+});
+</code></pre>
+
+<p>Supported operations are:</p>
+<ul>
+<li>create and drop</li>
+<li>collection</li>
+<li>hasCollection</li>
+<li>index and dropIndex (compound indexes supported as well)</li>
+<li>unique</li>
+<li>background, sparse, expire (MongoDB specific)</li>
+</ul>
+<p>All other (unsupported) operations are implemented as dummy pass-through methods, because MongoDB does not use a predefined schema.
+Read more about the schema builder on <a href="http://laravel.com/docs/schema">http://laravel.com/docs/schema</a></p>
+<h3 id="dates">Dates<a class="headerlink" href="#dates" title="Permanent link">#</a></h3>
+<p>Eloquent allows you to work with Carbon/DateTime objects instead of MongoDate objects. Internally, these dates will be converted to MongoDate objects when saved to the database.
+If you wish to use this functionality on non-default date fields you will need to manually specify them as described here: <a href="http://laravel.com/docs/eloquent#date-mutators">http://laravel.com/docs/eloquent#date-mutators</a></p>
+<p>Example:</p>
+<pre><code class="php">use Moloquent\Eloquent\Model as Eloquent;
+
+class User extends Eloquent {
+
+    protected $dates = ['birthday'];
+
+}
+</code></pre>
+
+<p>Which allows you to execute queries like:</p>
+<pre><code class="php">$users = User::where('birthday', '&gt;', new DateTime('-18 years'))-&gt;get();
+</code></pre>
+
+<h3 id="soft-deleting">Soft deleting<a class="headerlink" href="#soft-deleting" title="Permanent link">#</a></h3>
+<p>When soft deleting a model, it is not actually removed from your database. Instead, a <code>deleted_at</code> timestamp is set on the record.
+To enable soft deletes for a model, apply the <code>SoftDeletes</code> Trait to the model:</p>
+<pre><code class="php">use Moloquent\Eloquent\SoftDeletes;
+
+class User extends Eloquent {
+
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
+}
+</code></pre>
+
+<p>For more information check http://laravel.com/docs/eloquent#soft-deleting</p>
+<h3 id="query-builder">Query Builder<a class="headerlink" href="#query-builder" title="Permanent link">#</a></h3>
+<p>The database driver plugs right into the original query builder. When using mongodb connections, you will be able to build fluent queries to perform database operations. For your convenience, there is a <code>collection</code> alias for <code>table</code> as well as some additional mongodb specific operators/operations.</p>
+<pre><code class="php">$users = DB::collection('users')-&gt;get();
+
+$user = DB::collection('users')-&gt;where('name', 'John')-&gt;first();
+</code></pre>
+
+<p>If you did not change your default database connection, you will need to specify it when querying.</p>
+<pre><code class="php">$user = DB::connection('mongodb')-&gt;collection('users')-&gt;get();
+</code></pre>
+
+<p>Read more about the query builder on http://laravel.com/docs/queries</p>
+<h4 id="raw-expressions">Raw Expressions<a class="headerlink" href="#raw-expressions" title="Permanent link">#</a></h4>
+<p>You can also perform raw expressions on the internal MongoCollection object. If this is executed on the model class, it will return a collection of models. If this is executed on the query builder, it will return the original response.</p>
+<pre><code class="php">// Returns a collection of User models.
+$models = User::raw(function($collection)
+{
+    return $collection-&gt;find();
+});
+
+// Returns the original MongoCursor.
+$cursor = DB::collection('users')-&gt;raw(function($collection)
+{
+    return $collection-&gt;find();
+});
+</code></pre>
+
+<p>Optional: if you don't pass a closure to the raw method, the internal MongoCollection object will be accessible:</p>
+<pre><code class="php">$model = User::raw()-&gt;findOne(['age' =&gt; array('$lt' =&gt; 18]));
+</code></pre>
+
+<p>The internal MongoClient and MongoDB objects can be accessed like this:</p>
+<pre><code class="php">$client = DB::getMongoClient();
+$db = DB::getMongoDB();
+</code></pre>
+
+<h4 id="query-caching">Query Caching<a class="headerlink" href="#query-caching" title="Permanent link">#</a></h4>
+<p>You may easily cache the results of a query using the remember method:</p>
+<pre><code class="php">$users = User::remember(10)-&gt;get();
+</code></pre>
+
+<p><em>From: http://laravel.com/docs/queries#caching-queries</em></p>
+<h4 id="query-logging">Query Logging<a class="headerlink" href="#query-logging" title="Permanent link">#</a></h4>
+<p>By default, Laravel keeps a log in memory of all queries that have been run for the current request. However, in some cases, such as when inserting a large number of rows, this can cause the application to use excess memory. To disable the log, you may use the <code>disableQueryLog</code> method:</p>
+<pre><code class="php">DB::connection()-&gt;disableQueryLog();
+</code></pre>
+
+<p><em>From: http://laravel.com/docs/database#query-logging</em></p>
+<h4 id="order-by">Order By<a class="headerlink" href="#order-by" title="Permanent link">#</a></h4>
+<pre><code class="php">$users = User::orderBy('name', 'desc')-&gt;get();
+</code></pre>
+
+<h4 id="offset-limit">Offset &amp; Limit<a class="headerlink" href="#offset-limit" title="Permanent link">#</a></h4>
+<pre><code class="php">$users = User::skip(10)-&gt;take(5)-&gt;get();
+</code></pre>
+
+<h4 id="distinct">Distinct<a class="headerlink" href="#distinct" title="Permanent link">#</a></h4>
+<p>Distinct requires a field for which to return the distinct values.</p>
+<pre><code class="php">$users = User::distinct()-&gt;get(['name']);
+// or
+$users = User::distinct('name')-&gt;get();
+</code></pre>
+
+<p>Distinct can be combined with <strong>where</strong>:</p>
+<pre><code class="php">$users = User::where('active', true)-&gt;distinct('name')-&gt;get();
+</code></pre>
+
+<h4 id="group-by">Group By<a class="headerlink" href="#group-by" title="Permanent link">#</a></h4>
+<p>Selected columns that are not grouped will be aggregated with the $last function.</p>
+<pre><code class="php">$users = Users::groupBy('title')-&gt;get(['title', 'name']);
+</code></pre>
+
+<h4 id="aggregation">Aggregation<a class="headerlink" href="#aggregation" title="Permanent link">#</a></h4>
+<pre><code class="php">$total = Order::count();
+$price = Order::max('price');
+$price = Order::min('price');
+$price = Order::avg('price');
+$total = Order::sum('price');
+</code></pre>
+
+<p>Aggregations can be combined with <strong>where</strong>:</p>
+<pre><code class="php">$sold = Orders::where('sold', true)-&gt;sum('price');
+</code></pre>
+
+<h3 id="mongodb-specific-operations">MongoDB specific operations<a class="headerlink" href="#mongodb-specific-operations" title="Permanent link">#</a></h3>
+<h4 id="cursor-timeout">Cursor timeout<a class="headerlink" href="#cursor-timeout" title="Permanent link">#</a></h4>
+<p>To prevent MongoCursorTimeout exceptions, you can manually set a timeout value that will be applied to the cursor:</p>
+<pre><code class="php">DB::collection('users')-&gt;timeout(-1)-&gt;get();
+</code></pre>
+
+<h4 id="upsert">Upsert<a class="headerlink" href="#upsert" title="Permanent link">#</a></h4>
+<p>Update or insert a document. Additional options for the update method are passed directly to the native update method.</p>
+<pre><code class="php">DB::collection('users')-&gt;where('name', 'John')
+                       -&gt;update($data, ['upsert' =&gt; true]);
+</code></pre>
+
+<h4 id="projections">Projections<a class="headerlink" href="#projections" title="Permanent link">#</a></h4>
+<p>You can apply projections to your queries using the <code>project</code> method.</p>
+<pre><code class="php">DB::collection('items')-&gt;project(['tags' =&gt; array('$slice' =&gt; 1]))-&gt;get();
+</code></pre>
+
+<h4 id="projections-with-pagination">Projections with Pagination<a class="headerlink" href="#projections-with-pagination" title="Permanent link">#</a></h4>
+<pre><code class="php">$limit = 25;
+$projections = ['id', 'name'];
+DB::collection('items')-&gt;paginate($limit, $projections);
+</code></pre>
+
+<h4 id="push">Push<a class="headerlink" href="#push" title="Permanent link">#</a></h4>
+<p>Add an items to an array.</p>
+<pre><code class="php">DB::collection('users')-&gt;where('name', 'John')-&gt;push('items', 'boots');
+DB::collection('users')-&gt;where('name', 'John')-&gt;push('messages', ['from' =&gt; 'Jane Doe', 'message' =&gt; 'Hi John']);
+</code></pre>
+
+<p>If you don't want duplicate items, set the third parameter to <code>true</code>:</p>
+<pre><code class="php">DB::collection('users')-&gt;where('name', 'John')-&gt;push('items', 'boots', true);
+</code></pre>
+
+<h4 id="pull">Pull<a class="headerlink" href="#pull" title="Permanent link">#</a></h4>
+<p>Remove an item from an array.</p>
+<pre><code class="php">DB::collection('users')-&gt;where('name', 'John')-&gt;pull('items', 'boots');
+DB::collection('users')-&gt;where('name', 'John')-&gt;pull('messages', ['from' =&gt; 'Jane Doe', 'message' =&gt; 'Hi John']);
+</code></pre>
+
+<h4 id="unset">Unset<a class="headerlink" href="#unset" title="Permanent link">#</a></h4>
+<p>Remove one or more fields from a document.</p>
+<pre><code class="php">DB::collection('users')-&gt;where('name', 'John')-&gt;unset('note');
+</code></pre>
+
+<p>You can also perform an unset on a model.</p>
+<pre><code class="php">$user = User::where('name', 'John')-&gt;first();
+$user-&gt;unset('note');
+</code></pre>
+
+<h4 id="incrementing-or-decrementing">Incrementing or decrementing<a class="headerlink" href="#incrementing-or-decrementing" title="Permanent link">#</a></h4>
+<p>Perform increments or decrements (default 1) on specified attributes:</p>
+<pre><code class="php">User::where('name', 'John Doe')-&gt;increment('age');
+User::where('name', 'Jaques')-&gt;decrement('weight', 50);
+</code></pre>
+
+<p>The number of updated objects is returned:</p>
+<pre><code class="php">$count = User-&gt;increment('age');
+</code></pre>
+
+<p>You may also specify additional columns to update:</p>
+<pre><code class="php">User::where('age', '29')-&gt;increment('age', 1, ['group' =&gt; 'thirty something']);
+User::where('bmi', 30)-&gt;decrement('bmi', 1, ['category' =&gt; 'overweight']);
+</code></pre></div>
+</div>
+
+<footer>
+    <div style="text-align: center;">
+        Developed by <a href="https://github.com/jenssegers">Jenssegers</a> | Docs by <a href="https://github.com/pi0">pi0</a>
+        <br>
+        Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.
+    </div>
+</footer>
+
+<script src="../../js/jquery-1.10.2.min.js"></script>
+<script src="../../js/bootstrap-3.0.3.min.js"></script>
+<script src="../../js/highlight.pack.js"></script>
+<script src="../../js/jquery.nanoscroller.min.js"></script>
+<script>var base_url = '../..';</script>
+<script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+<script src="../../js/base.js"></script>
+
+<div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
