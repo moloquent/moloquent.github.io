@@ -145,7 +145,7 @@
             
             <li><a href="#queues">Queues</a></li>
             
-            <li><a href="#sessions">Sessions</a></li>
+            <li><a href="#passport">Passport</a></li>
             
             
         </ul>
@@ -166,6 +166,13 @@ This library extends the original Laravel classes, so it uses exactly the same m
 You can find installation instructions at 
 <a href="http://php.net/manual/en/mongodb.installation.php">http://php.net/manual/en/mongodb.installation.php</a>.</p>
 <h4 id="installation-using-composer">Installation using composer<a class="headerlink" href="#installation-using-composer" title="Permanent link">#</a></h4>
+<h5 id="bleeding-edge">Bleeding Edge<a class="headerlink" href="#bleeding-edge" title="Permanent link">#</a></h5>
+<p>We try our best to commit well tested and stable commits to this branch and every commit is already unit tested.
+If you want to get always bleeding edge version use this:</p>
+<pre><code class="bash">composer require moloquent/moloquent:dev-master
+</code></pre>
+
+<h5 id="stable">Stable<a class="headerlink" href="#stable" title="Permanent link">#</a></h5>
 <pre><code class="bash">composer require moloquent/moloquent
 </code></pre>
 
@@ -225,7 +232,7 @@ $app-&gt;withEloquent();
 
 <p>This service provider will slightly modify the internal DatabaseReminderRepository to add support for MongoDB based password reminders. If you don't use password reminders, you don't have to register this service provider and everything else should work just fine.</p>
 <h2 id="queues">Queues<a class="headerlink" href="#queues" title="Permanent link">#</a></h2>
-<p>And add the service provider in <code>config/app.php</code>: </p>
+<p>Add the service provider in <code>config/app.php</code>: </p>
 <pre><code class="php">Moloquent\MongodbQueueServiceProvider::class,
 </code></pre>
 
@@ -246,10 +253,11 @@ $app-&gt;withEloquent();
     ],
 </code></pre>
 
-<h2 id="sessions">Sessions<a class="headerlink" href="#sessions" title="Permanent link">#</a></h2>
-<p><strong>THIS IS A WORK IN PROGRESS</strong><br />
-The MongoDB session driver is available in a separate package,
-check out <a href="https://github.com/jenssegers/Laravel-MongoDB-Session">Laravel-MongoDB-Session</a></p></div>
+<h2 id="passport">Passport<a class="headerlink" href="#passport" title="Permanent link">#</a></h2>
+<p><strong>dev-master only</strong>
+In order to use laravel passport with your models, add <code>PassportServiceProvider</code> service provider in <code>config/app.php</code>: </p>
+<pre><code class="php">Moloquent\Passport\PassportServiceProvider::class,
+</code></pre></div>
 </div>
 
 <footer>
